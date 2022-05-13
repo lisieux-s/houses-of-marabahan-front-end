@@ -13,8 +13,6 @@ export default function CreateCharacter() {
 
   function handleChange({ target }) {
     setCharacterData({ ...characterData, [target.name]: target.value });
-    console.log(target.value);
-    console.log(characterData.kind);
   }
 
   return (
@@ -37,10 +35,7 @@ export default function CreateCharacter() {
                 type='radio'
                 value={kind.name}
                 name='kind'
-                onChange={() => {
-                  setCharacterData({ ...characterData, kind: kind.name });
-                  console.log(characterData);
-                }}
+                onChange={(e) => handleChange(e)}
               />
             </div>
           ))}
