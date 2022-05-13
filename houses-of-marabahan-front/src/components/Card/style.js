@@ -11,8 +11,8 @@ export const StyledArticle = styled.article`
   box-shadow: 0px 5px 10px 3px rgba(50, 50, 50, 0.15);
   background: linear-gradient(
     0deg,
-    rgba(255, 255, 255, 0) 10%,
-    rgba(40, 160, 255, 1) 150%
+    rgba(255, 255, 255, 0) 0%,
+    rgba(40, 160, 255, 1) 100%
   );
   
 
@@ -23,7 +23,7 @@ export const StyledArticle = styled.article`
   margin: 16px;
   img {
     object-fit: none;
-    filter: brightness(0%);
+    filter: brightness(1000%);
   }
 
   p {
