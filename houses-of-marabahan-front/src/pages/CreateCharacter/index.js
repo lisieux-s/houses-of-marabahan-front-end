@@ -1,4 +1,4 @@
-import Card from '../../components/Character/Card';
+import Card from '../../components/Card'
 import kinds from '../../assets/lore/kinds';
 
 import { Selection } from '../../components/Selection/style';
