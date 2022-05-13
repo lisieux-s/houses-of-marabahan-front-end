@@ -2,8 +2,7 @@
 A modern take on 2000s browser-based virtual worlds.
 
 ## Features in development
-- Found your house
-- Create multiple characters 
+- Found your house and create multiple characters 
 - Send messages and gifts to your friends
 - Trade with other players
 - Spend your hard-earned money on a meal at Mikaila's (and listen to her advice, free of charge)
