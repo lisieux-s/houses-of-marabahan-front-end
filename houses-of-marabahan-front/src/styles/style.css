@@ -7,6 +7,7 @@
 }
 
 body {
+    
     padding: 8px;
     background: #fff;
     font-family: 'Langar', cursive;
@@ -16,4 +17,17 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+}
+
+main > div {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    width: 1080px;
+}
+
+input[type='radio'] {
+    appearance: none;
 }
