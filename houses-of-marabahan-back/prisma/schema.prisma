@@ -1,0 +1,89 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model House {
+  id       Int    @id @default(autoincrement())
+  name     String @unique
+  email    String
+  password String
+
+  houseCharacter HouseCharacter[]
+
+  @@map("houses")
+}
+
+model Character {
+  id     Int    @id @default(autoincrement())
+  name   String
+  kind   Kind   @relation(fields: [kindId], references: [id])
+  kindId Int
+
+  houseCharacter HouseCharacter[]
+  inventory      Inventory[]
+
+  @@map("characters")
+}
+
+model HouseCharacter {
+  id          Int       @id @default(autoincrement())
+  houseId     Int
+  house       House     @relation(fields: [houseId], references: [id])
+  characterId Int
+  character   Character @relation(fields: [characterId], references: [id])
+
+  @@map("housesCharacters")
+}
+
+model Kind {
+  id   Int    @id @default(autoincrement())
+  name String
+  spriteUrl String
+
+  character Character[]
+  @@map("kinds")
+}
+
+model Item {
+  id     Int    @id @default(autoincrement())
+  name   String
+  spriteUrl String
+
+  inventoryItem InventoryItem[]
+
+  @@map("items")
+}
+
+model Inventory {
+  id          Int       @id @default(autoincrement())
+  characterId Int
+  character   Character @relation(fields: [characterId], references: [id])
+
+  inventoryItem InventoryItem[]
+
+  @@map("inventories")
+}
+
+model InventoryItem {
+  id          Int       @id @default(autoincrement())
+  inventoryId Int
+  inventory Inventory @relation(fields: [inventoryId], references: [id])
+  itemId Int 
+  item Item @relation(fields: [itemId], references: [id])
+
+  @@map("inventoriesItems")
+}
+
+model NonPlayableCharacter {
+  id          Int       @id @default(autoincrement())
+  name String
+  portraitUrl String
+}
