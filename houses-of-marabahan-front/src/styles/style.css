@@ -6,11 +6,15 @@
 * {
   box-sizing: border-box;
   transition: all 0.2s;
+  border-radius: 4px;
 }
 
 .logo {
   width: 500px;
+  height: 100%;
   filter: brightness(0);
+
+  object-fit: cover;
 }
 
 body {
@@ -30,25 +34,49 @@ body {
 }
 
 main {
+  border: none;
   display: flex;
+  flex-direction: column;
   padding: 16px;
+
+  width: 50vw;
+  box-shadow: 0px 5px 10px 3px rgba(50, 50, 50, 0.15);
 }
 
 form {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 8px;
 }
 
 input {
   border: none;
-  border-radius: 4px;
-  box-shadow: 0px 5px 10px 3px rgba(50, 50, 50, 0.15);
+  border-bottom: 1px solid black;
+  /* box-shadow: 0px 5px 10px 3px rgba(50, 50, 50, 0.08); */
 
   height: 50px;
-  width: 200px;
+  width: 50%;
+
+  padding: 16px;
 }
 
 input[type='radio'] {
   display: none;
+}
+
+button {
+  width: 64px;
+  height: 32px;
+
+  border: 1px solid black;
+  /* box-shadow: 0px 5px 0 0 rgba(50, 50, 50, 1); */
+
+  background: none;
+
+  text-transform: uppercase;
+}
+
+@media (max-width: 600px) {
+  
 }

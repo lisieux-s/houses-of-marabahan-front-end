@@ -6,9 +6,7 @@ import LOGO from '../../assets/logo.png'
 export default function NavBar() {
     return(
         <StyledNav>
-            <Link to='/home'>home</Link>
-            <img className='logo' src={LOGO} alt="Houses of Marabahan" />
-            <Link to='/messages'>messages</Link>
+            <Link to='/home'><img className='logo' src={LOGO} alt="Houses of Marabahan" /></Link>
         </StyledNav>
     )
 }

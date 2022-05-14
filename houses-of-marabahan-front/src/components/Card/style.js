@@ -7,16 +7,18 @@ export const Card = styled.label`
   justify-content: space-between;
 
   //border: 2px solid black;
-  border-radius: 4px;
   box-shadow: 0px 5px 10px 3px rgba(50, 50, 50, 0.15);
-  background: linear-gradient(
+  /* background: linear-gradient(
     0deg,
     rgba(255, 255, 255, 0) 0%,
     rgba(40, 160, 255, 1) 100%
-  );
+  ); */
 
-  width: 150px;
-  height: 300px;
+  /* width: 150px;
+  height: 300px; */
+
+  width: 128px;
+  height: 128px;
 
   padding: 16px;
   margin: 16px;

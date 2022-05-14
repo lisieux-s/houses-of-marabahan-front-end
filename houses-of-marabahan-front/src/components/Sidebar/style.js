@@ -5,8 +5,12 @@ export const Sidebar = styled.div`
   flex-direction: column;
   align-items: center;
   width: 500px;
+  height: 100%;
 
   position: fixed;
   left: ${props => props.left? '0' : 'auto'};
   right: ${props => props.right? '0' : 'auto'};
+  top: 102px;
+
+  width: 25vw;
 `;
