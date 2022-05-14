@@ -13,11 +13,12 @@ export default function CreateCharacter() {
 
   function handleChange({ target }) {
     setCharacterData({ ...characterData, [target.name]: target.value });
+    console.log(characterData);
   }
 
   return (
     <main>
-      <div>
+      <form>
         <p>What is your kind?</p>
         <Selection>
           {kinds.map((kind, index) => (
@@ -40,15 +41,18 @@ export default function CreateCharacter() {
             </div>
           ))}
         </Selection>
-      </div>
-      <div>
+        <Selection>
         <p>What is your name?</p>
-        <input />
-      </div>
-      <div>
+        <input
+          type='text'
+          value={characterData.name}
+          name='name'
+          onChange={(e) => handleChange(e)}
+        />
         <p>What do you seek?</p>
         <input />
-      </div>
+        </Selection>
+      </form>
     </main>
   );
 }

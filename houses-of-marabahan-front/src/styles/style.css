@@ -1,33 +1,54 @@
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,300;0,400;0,700;1,300;1,400;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Langar&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=BIZ+UDGothic:wght@400;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Eczar:wght@400;500;800&display=swap');
 
 * {
-    box-sizing: border-box;
-    transition: all 0.2s;
+  box-sizing: border-box;
+  transition: all 0.2s;
+}
+
+.logo {
+  width: 500px;
+  filter: brightness(0);
 }
 
 body {
-    
-    padding: 8px;
-    background: #fff;
-    font-family: 'Langar', cursive;
+  padding: 8px;
+  background: #fff;
+  /* font-family: 'Langar', cursive; */
+  font-family: 'BIZ UDGothic', sans-serif;
+  /* font-family: 'Eczar', serif; */
 }
 
 #root {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 102px;
 }
 
-main > div {
-    display: flex;
-    flex-direction: column;
+main {
+  display: flex;
+  padding: 16px;
+}
 
-    align-items: center;
-    width: 1080px;
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+input {
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0px 5px 10px 3px rgba(50, 50, 50, 0.15);
+
+  height: 50px;
+  width: 200px;
 }
 
 input[type='radio'] {
-    appearance: none;
+  display: none;
 }

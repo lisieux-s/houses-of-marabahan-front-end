@@ -4,8 +4,13 @@ export const StyledNav = styled.nav`
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    position: absolute;
+    top: 0;
     
     width: 100vw;
-    height: 64px;
+    height: 102px;
     padding: 16px;
+
+    background: white;
 `
