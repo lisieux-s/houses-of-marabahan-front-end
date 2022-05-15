@@ -4,9 +4,10 @@ import * as houseService from '../services/houseService.js';
 
 export async function createHouse(req: Request, res: Response) {
   const { houseData } = req.body;
-  const { item } = req.body;
+  const starterItem = req.body.starterItem;
+  console.log(starterItem)
 
-  await houseService.signUp(houseData);
+  await houseService.signUp(houseData, starterItem);
   res.sendStatus(201);
 }
 

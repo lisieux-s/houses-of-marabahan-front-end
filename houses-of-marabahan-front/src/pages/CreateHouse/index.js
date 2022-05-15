@@ -99,8 +99,10 @@ export default function CreateHouse() {
         <Selection>
           <Card
             htmlFor='shovel'
-            selection={formData.starterItem === 'shovel'}
-          />
+            selection={formData.starterItem=== 'shovel'}
+          >
+            <p>shovel</p>
+          </Card>
           <input
             id='shovel'
             type='radio'
@@ -108,7 +110,9 @@ export default function CreateHouse() {
             value='shovel'
             onChange={(e) => handleChange(e)}
           />
-          <Card htmlFor='sword' selection={formData.starterItem === 'sword'} />
+          <Card htmlFor='sword' selection={formData.starterItem === 'sword'}>
+            <p>sword</p>
+          </Card>
           <input
             id='sword'
             type='radio'
@@ -119,7 +123,9 @@ export default function CreateHouse() {
           <Card
             htmlFor='knitting-kit'
             selection={formData.starterItem === 'knitting kit'}
-          />
+          >
+            <p>knitting kit</p>
+          </Card>
           <input
             id='knitting-kit'
             type='radio'

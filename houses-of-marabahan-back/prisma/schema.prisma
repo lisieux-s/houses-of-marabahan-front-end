@@ -17,6 +17,7 @@ model House {
   password String
 
   houseCharacter HouseCharacter[]
+  houseItem HouseItem[]
 
   @@map("houses")
 }
@@ -56,9 +57,10 @@ model Item {
   id        Int    @id @default(autoincrement())
   name      String
   spriteUrl String
+  description String
 
   inventoryItem InventoryItem[]
-  storageItem StorageItem[]
+  houseItem HouseItem[]
 
   @@map("items")
 }
@@ -83,19 +85,14 @@ model InventoryItem {
   @@map("inventoriesItems")
 }
 
-model Storage {
-  id      Int @id @default(autoincrement())
-  houseId Int
-
-  storageItem StorageItem[]
-}
-
-model StorageItem {
+model HouseItem {
   id Int @id @default(autoincrement())
-  storageId Int
-  storage Storage @relation(fields: [storageId], references: [id])
+  houseId Int
+  house House @relation(fields: [houseId], references: [id])
   itemId Int
   item Item @relation(fields: [itemId], references: [id])
+
+  @@map("houseItem")
 }
 
 model NonPlayableCharacter {
