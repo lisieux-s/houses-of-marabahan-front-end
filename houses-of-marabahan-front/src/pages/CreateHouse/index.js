@@ -14,19 +14,26 @@ export default function CreateHouse() {
     passwordConfirm: '',
     starterItem: '',
   });
+  const [inputWidth, setInputWidth] = useState('500px');
 
   //add function for filtering names (length, allowed characters...)
+  //add tooltip for cases when name is unavailable
 
   useEffect(() => {
-    const delay = setTimeout(async () => { 
-      if(formData.name.length >= 3) {
+    const delay = setTimeout(async () => {
+      if (formData.name.length >= 3) {
         const result = await api.findHouseByName(formData.name);
-        if(result.data) console.log('Sorry, this name is unavailable.') 
-      } 
-    }, 1000)
-    
-    return () => clearTimeout(delay)
-  }, [formData.name])
+        if (result.data) console.log('Sorry, this name is unavailable.');
+      }
+    }, 1000);
+
+    return () => clearTimeout(delay);
+  }, [formData.name]);
+
+  useEffect(() => {
+    const width = 64 + formData.name.length * 10
+    setInputWidth(`${width}px`);
+  }, [formData.name]);
 
   function handleChange({ target }) {
     setFormData({ ...formData, [target.name]: target.value });
@@ -59,13 +66,15 @@ export default function CreateHouse() {
       <form onSubmit={(e) => handleSubmit(e)}>
         <p>Create an account</p>
         <input
+          className='data-expand'
           type='text'
-          placeholder='Name of your house'
+          placeholder='name'
           name='name'
           value={formData.name}
           onChange={(e) => {
             handleChange(e);
           }}
+          style={{ width: inputWidth, textAlign: 'center' }}
           required
         />
         <input
