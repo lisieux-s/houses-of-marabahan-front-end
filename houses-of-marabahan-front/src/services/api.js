@@ -16,7 +16,12 @@ async function signUp(data) {
     await baseAPI.post('/sign-up', data);
 }
 
+async function findHouseByName(name) {
+    return await baseAPI.get(`/house/${name}`)
+}
+
 const api = {
+    findHouseByName,
     signUp
 }
 export default api;

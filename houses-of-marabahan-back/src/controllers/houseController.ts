@@ -11,8 +11,8 @@ export async function createHouse(req: Request, res: Response) {
 }
 
 export async function checkNameAvailability(req: Request, res: Response) {
-  const name = req.body;
-  const existingHouse = await houseService.checkExistingHouse(name);
-  if (existingHouse) return res.send(true);
-  return res.send(false);
+  const { name } = req.params;
+  const result = await houseService.checkExistingHouse(name);
+  if(result) return res.send(true);
+  res.send(false)
 }

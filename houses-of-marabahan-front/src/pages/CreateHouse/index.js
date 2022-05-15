@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useEffect } from 'react';
 
 import { Card } from '../../components/Card/style';
 import { Selection } from '../../components/Selection/style';
@@ -14,14 +15,22 @@ export default function CreateHouse() {
     starterItem: '',
   });
 
-  async function isNameAvailable() {}
+  //add function for filtering names (length, allowed characters...)
+
+  useEffect(() => {
+    const delay = setTimeout(async () => { 
+      if(formData.name.length >= 3) {
+        const result = await api.findHouseByName(formData.name);
+        if(result.data) console.log('Sorry, this name is unavailable.') 
+      } 
+    }, 1000)
+    
+    return () => clearTimeout(delay)
+  }, [formData.name])
 
   function handleChange({ target }) {
     setFormData({ ...formData, [target.name]: target.value });
   }
-
-  function checkNameAvailability() {}
-  //check name availability as user types through api
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -56,7 +65,6 @@ export default function CreateHouse() {
           value={formData.name}
           onChange={(e) => {
             handleChange(e);
-            isNameAvailable();
           }}
           required
         />
