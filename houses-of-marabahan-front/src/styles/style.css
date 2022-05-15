@@ -80,3 +80,7 @@ button {
 @media (max-width: 600px) {
   
 }
+
+p {
+  margin-top: 64px;
+}

@@ -31,7 +31,7 @@ export default function CreateHouse() {
   }, [formData.name]);
 
   useEffect(() => {
-    const width = 64 + formData.name.length * 10
+    const width = 128+ formData.name.length * 16
     setInputWidth(`${width}px`);
   }, [formData.name]);
 
@@ -65,18 +65,6 @@ export default function CreateHouse() {
     <main>
       <form onSubmit={(e) => handleSubmit(e)}>
         <p>Create an account</p>
-        <input
-          className='data-expand'
-          type='text'
-          placeholder='name'
-          name='name'
-          value={formData.name}
-          onChange={(e) => {
-            handleChange(e);
-          }}
-          style={{ width: inputWidth, textAlign: 'center' }}
-          required
-        />
         <input
           type='email'
           placeholder='e-mail'
@@ -140,6 +128,19 @@ export default function CreateHouse() {
             onChange={(e) => handleChange(e)}
           />
         </Selection>
+        <p>Choose a name for your house</p>
+        <h2>House of</h2>
+        <input
+          type='text'
+          placeholder='name'
+          name='name'
+          value={formData.name}
+          onChange={(e) => {
+            handleChange(e);
+          }}
+          style={{ width: inputWidth, textAlign: 'center', fontSize: '36px' }}
+          required
+        />
         <button>Send</button>
       </form>
     </main>
