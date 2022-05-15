@@ -44,8 +44,8 @@ model HouseCharacter {
 }
 
 model Kind {
-  id   Int    @id @default(autoincrement())
-  name String
+  id        Int    @id @default(autoincrement())
+  name      String
   spriteUrl String
 
   character Character[]
@@ -53,11 +53,12 @@ model Kind {
 }
 
 model Item {
-  id     Int    @id @default(autoincrement())
-  name   String
+  id        Int    @id @default(autoincrement())
+  name      String
   spriteUrl String
 
   inventoryItem InventoryItem[]
+  storageItem StorageItem[]
 
   @@map("items")
 }
@@ -75,15 +76,30 @@ model Inventory {
 model InventoryItem {
   id          Int       @id @default(autoincrement())
   inventoryId Int
-  inventory Inventory @relation(fields: [inventoryId], references: [id])
-  itemId Int 
-  item Item @relation(fields: [itemId], references: [id])
+  inventory   Inventory @relation(fields: [inventoryId], references: [id])
+  itemId      Int
+  item        Item      @relation(fields: [itemId], references: [id])
 
   @@map("inventoriesItems")
 }
 
+model Storage {
+  id      Int @id @default(autoincrement())
+  houseId Int
+
+  storageItem StorageItem[]
+}
+
+model StorageItem {
+  id Int @id @default(autoincrement())
+  storageId Int
+  storage Storage @relation(fields: [storageId], references: [id])
+  itemId Int
+  item Item @relation(fields: [itemId], references: [id])
+}
+
 model NonPlayableCharacter {
-  id          Int       @id @default(autoincrement())
-  name String
+  id          Int    @id @default(autoincrement())
+  name        String
   portraitUrl String
 }

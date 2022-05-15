@@ -1,10 +1,9 @@
 import { useState } from 'react';
 
-
 import { Card } from '../../components/Card/style';
 import { Selection } from '../../components/Selection/style';
 
-
+import api from '../../services/api';
 
 export default function CreateHouse() {
   const [formData, setFormData] = useState({
@@ -21,11 +20,24 @@ export default function CreateHouse() {
     setFormData({ ...formData, [target.name]: target.value });
   }
 
-  //check name availability through api
+  function checkNameAvailability() {}
+  //check name availability as user types through api
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     checkPasswordConfirmation();
+
+    const houseData = {
+      name: formData.name,
+      email: formData.email,
+      password: formData.password,
+    };
+    const starterItem = formData.starterItem;
+
+    await api.signUp({
+      houseData,
+      starterItem,
+    });
   }
 
   function checkPasswordConfirmation() {
@@ -38,7 +50,7 @@ export default function CreateHouse() {
       <form onSubmit={(e) => handleSubmit(e)}>
         <p>Create an account</p>
         <input
-        type='text'
+          type='text'
           placeholder='Name of your house'
           name='name'
           value={formData.name}
@@ -49,7 +61,7 @@ export default function CreateHouse() {
           required
         />
         <input
-        type='email'
+          type='email'
           placeholder='e-mail'
           name='email'
           value={formData.email}
@@ -59,7 +71,7 @@ export default function CreateHouse() {
           required
         />
         <input
-        type='password'
+          type='password'
           placeholder='password'
           name='password'
           value={formData.password}
@@ -69,7 +81,7 @@ export default function CreateHouse() {
           required
         />
         <input
-        type='password'
+          type='password'
           placeholder='confirm your password'
           name='passwordConfirm'
           value={formData.passwordConfirm}
