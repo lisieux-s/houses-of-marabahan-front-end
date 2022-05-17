@@ -4,6 +4,7 @@ import kinds from '../../assets/lore/kinds';
 
 import { Selection } from '../../components/Selection/style';
 import { Square } from '../../components/Square/style';
+import { CharacterPortrait } from '../../components/CharacterPortrait/style';
 
 export default function CreateCharacter() {
   const [characterData, setCharacterData] = useState({
@@ -23,14 +24,13 @@ export default function CreateCharacter() {
         <Selection>
           {kinds.map((kind, index) => (
             <div key={index}>
-              <Square
+              <CharacterPortrait
                 htmlFor={`kind${index}`}
                 selection={kind.name === characterData.kind}
+                image={kind.sprite}
               >
                 <p>{kind.name}</p>
-                <img src={kind.sprite} alt='' />
-                <p>{kind.description}</p>
-              </Square>
+              </CharacterPortrait>
               <input
                 id={`kind${index}`}
                 type='radio'
@@ -42,15 +42,15 @@ export default function CreateCharacter() {
           ))}
         </Selection>
         <Selection>
-        <p>What is your name?</p>
-        <input
-          type='text'
-          value={characterData.name}
-          name='name'
-          onChange={(e) => handleChange(e)}
-        />
-        <p>What do you seek?</p>
-        <input />
+          <p>What is your name?</p>
+          <input
+            type='text'
+            value={characterData.name}
+            name='name'
+            onChange={(e) => handleChange(e)}
+          />
+          <p>What do you seek?</p>
+          <input />
         </Selection>
       </form>
     </main>

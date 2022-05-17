@@ -37,6 +37,11 @@ body {
   align-items: center;
 
   margin-top: 102px;
+  margin-bottom: 64px;
+}
+
+nav, footer {
+  border-radius: 0;
 }
 
 main {

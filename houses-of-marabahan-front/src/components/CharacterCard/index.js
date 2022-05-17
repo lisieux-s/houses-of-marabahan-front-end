@@ -1,11 +1,11 @@
 import { Card } from "./style"
-import { Portrait } from "../CharacterPortrait/style"
+import { CharacterPortrait } from "../CharacterPortrait/style"
 
 export default function CharacterCard() {
     return(
         <Card>
-            <Portrait>
-            </Portrait>
+            <CharacterPortrait>
+            </CharacterPortrait>
         </Card>
     )
 }
