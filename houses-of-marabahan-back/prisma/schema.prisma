@@ -16,7 +16,7 @@ model House {
   email    String
   password String
 
-  houseCharacter HouseCharacter[]
+  character Character[]
   houseItem HouseItem[]
 
   @@map("houses")
@@ -25,24 +25,19 @@ model House {
 model Character {
   id     Int    @id @default(autoincrement())
   name   String
-  kind   Kind   @relation(fields: [kindId], references: [id])
   kindId Int
+  kind   Kind   @relation(fields: [kindId], references: [id])
+  houseId Int
+  house House @relation(fields: [houseId], references: [id])
+  seeks String
+  fears String
 
-  houseCharacter HouseCharacter[]
   inventory      Inventory[]
 
   @@map("characters")
 }
 
-model HouseCharacter {
-  id          Int       @id @default(autoincrement())
-  houseId     Int
-  house       House     @relation(fields: [houseId], references: [id])
-  characterId Int
-  character   Character @relation(fields: [characterId], references: [id])
 
-  @@map("housesCharacters")
-}
 
 model Kind {
   id        Int    @id @default(autoincrement())
