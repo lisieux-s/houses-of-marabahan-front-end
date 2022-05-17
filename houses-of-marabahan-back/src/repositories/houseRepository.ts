@@ -1,8 +1,8 @@
 import { prisma } from "../database.js";
 
-import { CreateHouseData } from '../services/houseService.js'
+import { HouseData } from '../services/houseService.js'
 
-async function create(houseData: CreateHouseData) {
+async function create(houseData: HouseData) {
     return prisma.house.create({
         data: houseData
     })

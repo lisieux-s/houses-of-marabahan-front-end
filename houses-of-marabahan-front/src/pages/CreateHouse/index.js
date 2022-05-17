@@ -1,12 +1,17 @@
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Card } from '../../components/Card/style';
 import { Selection } from '../../components/Selection/style';
 
 import api from '../../services/api';
 
+import SHOVEL from '../../assets/items/starter_shovel.png';
+import SWORD from '../../assets/items/starter_sword.png';
+import KNITTING_KIT from '../../assets/items/starter_knitting_kit.png'
+
 export default function CreateHouse() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -31,7 +36,7 @@ export default function CreateHouse() {
   }, [formData.name]);
 
   useEffect(() => {
-    const width = 128+ formData.name.length * 16
+    const width = 128 + formData.name.length * 16;
     setInputWidth(`${width}px`);
   }, [formData.name]);
 
@@ -54,6 +59,12 @@ export default function CreateHouse() {
       houseData,
       starterItem,
     });
+
+    //log in with data,
+    //store stuff in localStorage, 
+    //send to home and prompt character creation
+
+    navigate('/home');
   }
 
   function checkPasswordConfirmation() {
@@ -64,7 +75,7 @@ export default function CreateHouse() {
   return (
     <main>
       <form onSubmit={(e) => handleSubmit(e)}>
-        <p>Create an account</p>
+        <h3>Create an account</h3>
         <input
           type='email'
           placeholder='e-mail'
@@ -95,13 +106,12 @@ export default function CreateHouse() {
           }}
           required
         />
-        <p>Choose a starter item</p>
+        <h3>Choose a starter item</h3>
         <Selection>
-          <Card
-            htmlFor='shovel'
-            selection={formData.starterItem=== 'shovel'}
-          >
+          <Card htmlFor='shovel' selection={formData.starterItem === 'shovel'}>
+          <img src={SHOVEL} alt='sword' />
             <p>shovel</p>
+            
           </Card>
           <input
             id='shovel'
@@ -111,7 +121,9 @@ export default function CreateHouse() {
             onChange={(e) => handleChange(e)}
           />
           <Card htmlFor='sword' selection={formData.starterItem === 'sword'}>
+          <img src={SWORD} alt='sword' />
             <p>sword</p>
+            
           </Card>
           <input
             id='sword'
@@ -124,7 +136,9 @@ export default function CreateHouse() {
             htmlFor='knitting-kit'
             selection={formData.starterItem === 'knitting kit'}
           >
+            <img src={KNITTING_KIT} alt='sword' />
             <p>knitting kit</p>
+            
           </Card>
           <input
             id='knitting-kit'
@@ -134,8 +148,8 @@ export default function CreateHouse() {
             onChange={(e) => handleChange(e)}
           />
         </Selection>
-        <p>Choose a name for your house</p>
-        <h2>House of</h2>
+        <h3>Choose a name for your house</h3>
+        <h1>House of</h1>
         <input
           type='text'
           placeholder='name'

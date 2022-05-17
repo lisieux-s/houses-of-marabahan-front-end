@@ -12,7 +12,7 @@ export const Card = styled.label`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
 
   box-shadow: 0px 5px 10px 3px rgba(50, 50, 50, 0.15);
 
@@ -21,13 +21,21 @@ export const Card = styled.label`
 
   padding: 16px;
   margin: 16px;
+
+  background: white;
   img {
-    object-fit: none;
-    filter: brightness(1000%);
+    position: absolute;
+    top: 0;
+    object-fit: contain;
   }
 
   p {
-    color: black;
+    position: relative;
+    z-index: 300;
+
+    text-shadow: 0px 0px 4px white;
+
+    text-align: center;
     opacity: 0;
   }
 
