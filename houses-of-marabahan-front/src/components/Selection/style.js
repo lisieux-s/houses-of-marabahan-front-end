@@ -7,4 +7,8 @@ export const Selection = styled.div`
 
   gap: 8px;
   padding: 16px;
+
+  div {
+    display: flex;
+  }
 `;

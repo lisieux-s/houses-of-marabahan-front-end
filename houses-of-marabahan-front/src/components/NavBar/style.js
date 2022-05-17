@@ -7,6 +7,7 @@ export const StyledNav = styled.nav`
 
   position: fixed;
   top: 0;
+  z-index: 1000;
 
   width: 100vw;
   height: 102px;
