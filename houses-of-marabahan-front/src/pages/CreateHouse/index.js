@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Card } from '../../components/Card/style';
+import { Square } from '../../components/Square/style';
 import { Selection } from '../../components/Selection/style';
 
 import api from '../../services/api';
@@ -108,11 +108,11 @@ export default function CreateHouse() {
         />
         <h3>Choose a starter item</h3>
         <Selection>
-          <Card htmlFor='shovel' selection={formData.starterItem === 'shovel'}>
+          <Square htmlFor='shovel' selection={formData.starterItem === 'shovel'}>
           <img src={SHOVEL} alt='sword' />
             <p>shovel</p>
             
-          </Card>
+          </Square>
           <input
             id='shovel'
             type='radio'
@@ -120,11 +120,11 @@ export default function CreateHouse() {
             value='shovel'
             onChange={(e) => handleChange(e)}
           />
-          <Card htmlFor='sword' selection={formData.starterItem === 'sword'}>
+          <Square htmlFor='sword' selection={formData.starterItem === 'sword'}>
           <img src={SWORD} alt='sword' />
             <p>sword</p>
             
-          </Card>
+          </Square>
           <input
             id='sword'
             type='radio'
@@ -132,14 +132,14 @@ export default function CreateHouse() {
             value='sword'
             onChange={(e) => handleChange(e)}
           />
-          <Card
+          <Square
             htmlFor='knitting-kit'
             selection={formData.starterItem === 'knitting kit'}
           >
             <img src={KNITTING_KIT} alt='sword' />
             <p>knitting kit</p>
             
-          </Card>
+          </Square>
           <input
             id='knitting-kit'
             type='radio'

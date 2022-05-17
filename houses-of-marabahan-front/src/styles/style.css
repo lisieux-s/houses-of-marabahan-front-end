@@ -61,7 +61,6 @@ form {
 input {
   border: none;
   border-bottom: 1px solid black;
-  /* box-shadow: 0px 5px 10px 3px rgba(50, 50, 50, 0.08); */
 
   height: 64px;
   width: 50%;

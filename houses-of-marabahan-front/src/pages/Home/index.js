@@ -1,4 +1,4 @@
-import { Garden } from '../../components/Planting/style';
+import { Garden } from '../../components/Garden/style';
 import TILLED_SOIL_SQUARE from '../../assets/house/tilled_soil.png';
 
 export default function Home() {

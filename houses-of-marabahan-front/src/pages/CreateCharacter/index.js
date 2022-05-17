@@ -3,7 +3,7 @@ import { useState } from 'react';
 import kinds from '../../assets/lore/kinds';
 
 import { Selection } from '../../components/Selection/style';
-import { Card } from '../../components/Card/style';
+import { Square } from '../../components/Square/style';
 
 export default function CreateCharacter() {
   const [characterData, setCharacterData] = useState({
@@ -23,14 +23,14 @@ export default function CreateCharacter() {
         <Selection>
           {kinds.map((kind, index) => (
             <div key={index}>
-              <Card
+              <Square
                 htmlFor={`kind${index}`}
                 selection={kind.name === characterData.kind}
               >
                 <p>{kind.name}</p>
                 <img src={kind.sprite} alt='' />
                 <p>{kind.description}</p>
-              </Card>
+              </Square>
               <input
                 id={`kind${index}`}
                 type='radio'

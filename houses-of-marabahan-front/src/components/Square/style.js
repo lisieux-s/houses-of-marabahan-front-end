@@ -1,13 +1,11 @@
 import styled from 'styled-components';
 
-export const Card = styled.label`
-
+export const Square = styled.label`
   width: 50px;
   height: 50px;
 
   position: relative;
-  bottom: ${(props) => props.selection ? '8px' : ''};
-  
+  bottom: ${(props) => (props.selection ? '8px' : '')};
 
   display: flex;
   flex-direction: column;
@@ -41,7 +39,7 @@ export const Card = styled.label`
 
   :hover {
     box-shadow: 0px 0px 31px 19px #ffeeba;
-    
+
     p {
       opacity: 100;
     }
