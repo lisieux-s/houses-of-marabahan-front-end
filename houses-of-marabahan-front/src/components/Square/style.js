@@ -5,7 +5,7 @@ export const Square = styled.label`
   height: 50px;
 
   position: relative;
-  bottom: ${(props) => (props.selection ? '8px' : '')};
+  bottom: ${(props) => (props.selected ? '8px' : '')};
 
   display: flex;
   flex-direction: column;

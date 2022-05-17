@@ -8,7 +8,7 @@ import api from '../../services/api';
 
 import SHOVEL from '../../assets/items/starter_shovel.png';
 import SWORD from '../../assets/items/starter_sword.png';
-import KNITTING_KIT from '../../assets/items/starter_knitting_kit.png'
+import KNITTING_KIT from '../../assets/items/starter_knitting_kit.png';
 
 export default function CreateHouse() {
   const navigate = useNavigate();
@@ -61,7 +61,7 @@ export default function CreateHouse() {
     });
 
     //log in with data,
-    //store stuff in localStorage, 
+    //store stuff in localStorage,
     //send to home and prompt character creation
 
     navigate('/home');
@@ -108,10 +108,9 @@ export default function CreateHouse() {
         />
         <h3>Choose a starter item</h3>
         <Selection>
-          <Square htmlFor='shovel' selection={formData.starterItem === 'shovel'}>
-          <img src={SHOVEL} alt='sword' />
+          <Square htmlFor='shovel' selected={formData.starterItem === 'shovel'}>
+            <img src={SHOVEL} alt='sword' />
             <p>shovel</p>
-            
           </Square>
           <input
             id='shovel'
@@ -120,10 +119,9 @@ export default function CreateHouse() {
             value='shovel'
             onChange={(e) => handleChange(e)}
           />
-          <Square htmlFor='sword' selection={formData.starterItem === 'sword'}>
-          <img src={SWORD} alt='sword' />
+          <Square htmlFor='sword' selected={formData.starterItem === 'sword'}>
+            <img src={SWORD} alt='sword' />
             <p>sword</p>
-            
           </Square>
           <input
             id='sword'
@@ -134,11 +132,10 @@ export default function CreateHouse() {
           />
           <Square
             htmlFor='knitting-kit'
-            selection={formData.starterItem === 'knitting kit'}
+            selected={formData.starterItem === 'knitting kit'}
           >
             <img src={KNITTING_KIT} alt='sword' />
             <p>knitting kit</p>
-            
           </Square>
           <input
             id='knitting-kit'

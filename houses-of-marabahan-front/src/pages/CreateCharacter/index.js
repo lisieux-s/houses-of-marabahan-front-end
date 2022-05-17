@@ -3,7 +3,6 @@ import { useState } from 'react';
 import kinds from '../../assets/lore/kinds';
 
 import { Selection } from '../../components/Selection/style';
-import { Square } from '../../components/Square/style';
 import { CharacterPortrait } from '../../components/CharacterPortrait/style';
 
 export default function CreateCharacter() {
@@ -14,7 +13,6 @@ export default function CreateCharacter() {
 
   function handleChange({ target }) {
     setCharacterData({ ...characterData, [target.name]: target.value });
-    console.log(characterData);
   }
 
   return (
@@ -26,8 +24,9 @@ export default function CreateCharacter() {
             <div key={index}>
               <CharacterPortrait
                 htmlFor={`kind${index}`}
-                selection={kind.name === characterData.kind}
+                selected={kind.name === characterData.kind}
                 image={kind.sprite}
+                create={true}
               >
                 <p>{kind.name}</p>
               </CharacterPortrait>
