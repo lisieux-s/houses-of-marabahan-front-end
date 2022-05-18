@@ -1,5 +1,5 @@
 import { Item } from '@prisma/client';
-import * as itemRepository from '../repositories/itemRepository';
+import * as itemRepository from '../repositories/itemRepository.js';
 
 export type CreateItemData = Omit<Item, 'id'>;
 

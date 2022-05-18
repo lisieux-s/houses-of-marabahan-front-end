@@ -8,6 +8,13 @@ export async function findByName(req: Request, res: Response) {
     res.send(item);
 }
 
+export async function findById(req: Request, res: Response) {
+    const { id } = req.params;
+    const itemId = parseInt(id);
+    const item = await itemService.findById(itemId);
+    res.send(item);
+}
+
 export async function addToStorage(req: Request, res: Response) {
     const body = req.body;
     await itemService.addToStorage(body.itemId, body.houseId)

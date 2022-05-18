@@ -6,12 +6,11 @@ import { Selection } from '../../components/Selection/style';
 
 import api from '../../services/api';
 
-import SHOVEL from '../../assets/items/starter_shovel.png';
-import SWORD from '../../assets/items/starter_sword.png';
-import KNITTING_KIT from '../../assets/items/starter_knitting_kit.png';
-
 export default function CreateHouse() {
   const navigate = useNavigate();
+  const [shovelImageUrl, setShovelImageUrl] = useState('');
+  const [swordImageUrl, setSwordImageUrl] = useState('');
+  const [knittingKitImageUrl, setKnittingKitImageUrl] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -23,6 +22,26 @@ export default function CreateHouse() {
 
   //add function for filtering names (length, allowed characters...)
   //add tooltip for cases when name is unavailable
+
+  useEffect(() => {
+    async function getStarterItem(id) {
+      const { data } = await api.getItemById(id)
+      console.log(data)
+      switch(id) {
+        case 1:
+          setSwordImageUrl(data.spriteUrl); break;
+        case 2:
+          setShovelImageUrl(data.spriteUrl); break;
+        case 3: 
+          setKnittingKitImageUrl(data.spriteUrl); break
+        default:
+          break;
+      }
+    }
+    for(let i = 1; i <= 3; i++) {
+      getStarterItem(i);
+    }
+  }, [])
 
   useEffect(() => {
     const delay = setTimeout(async () => {
@@ -109,7 +128,7 @@ export default function CreateHouse() {
         <h3>Choose a starter item</h3>
         <Selection>
           <Square htmlFor='shovel' selected={formData.starterItem === 'shovel'}>
-            <img src={SHOVEL} alt='sword' />
+            <img src={shovelImageUrl} alt='shovel' />
             <p>shovel</p>
           </Square>
           <input
@@ -120,7 +139,7 @@ export default function CreateHouse() {
             onChange={(e) => handleChange(e)}
           />
           <Square htmlFor='sword' selected={formData.starterItem === 'sword'}>
-            <img src={SWORD} alt='sword' />
+            <img src={swordImageUrl} alt='sword' />
             <p>sword</p>
           </Square>
           <input
@@ -134,7 +153,7 @@ export default function CreateHouse() {
             htmlFor='knitting-kit'
             selected={formData.starterItem === 'knitting kit'}
           >
-            <img src={KNITTING_KIT} alt='sword' />
+            <img src={knittingKitImageUrl} alt='sword' />
             <p>knitting kit</p>
           </Square>
           <input

@@ -24,9 +24,19 @@ async function getKinds() {
     return await baseAPI.get('/kinds');
 }
 
+async function getItemByName(name) {
+    return await baseAPI.get(`item/${name}`);
+}
+
+async function getItemById(id) {
+    return await baseAPI.get(`item/id/${id}`)
+}
+
 const api = {
     findHouseByName,
     signUp,
-    getKinds
+    getKinds,
+    getItemByName,
+    getItemById
 }
 export default api;
