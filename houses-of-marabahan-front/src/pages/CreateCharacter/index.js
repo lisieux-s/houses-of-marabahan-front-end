@@ -14,8 +14,16 @@ export default function CreateCharacter() {
   });
   const [inputWidth, setInputWidth] = useState('500px');
 
-  const hashTable = {}
-  const [kindImages, setKindImages] = useState({})
+  const [clayfeetSprite, setClayfeetSprite] = useState('');
+  const [paladiSprite, setPaladiSprite] = useState('');
+  const [flowerbudSprite, setFlowerbudSprite] = useState('');
+  const [merpersonSprite, setMerpersonSprite] = useState('');
+  const [mogamiSprite, setMogamiSprite] = useState('');
+  const [moonlitSprite, setMoonlitSprite] = useState('');
+  const [blueFolkSprite, setBlueFolkSprite] = useState('');
+  const [blaoruSprite, setBlaoruSprite] = useState('');
+  const [baegoSprite, setBaegoSprite] = useState('');
+  const [revenantSprite, setRevenantSprite] = useState('');
 
   //dynamic input width
   useEffect(() => {
@@ -31,17 +39,47 @@ export default function CreateCharacter() {
   //load sprites
   useEffect(() => {
     downloadImages();
-  }, [])
-
+  }, []);
 
   function downloadImages() {
     kinds.forEach(async (kind) => {
-        const name = await kind.name;
-        const url = await downloadImage(name)
-        console.log(url)
-        if(url) setKindImages(name[url])
-        console.log(kindImages)
-    })
+      const name = await kind.name;
+      const url = await downloadImage(name);
+      switch (name) {
+        case 'clayfeet':
+          setClayfeetSprite(url);
+          break;
+        case 'paladi':
+          setPaladiSprite(url);
+          break;
+        case 'flowerbud':
+          setFlowerbudSprite(url);
+          break;
+        case 'merperson':
+          setMerpersonSprite(url);
+          break;
+        case 'mogami':
+          setMogamiSprite(url);
+          break;
+        case 'moonlit':
+          setMoonlitSprite(url);
+          break;
+        case 'blue folk':
+          setBlueFolkSprite(url);
+          break;
+        case 'blaoru':
+          setBlaoruSprite(url);
+          break;
+        case 'baego':
+          setBaegoSprite(url);
+          break;
+        case 'revenant':
+          setRevenantSprite(url);
+          break;
+        default:
+          break;
+      }
+    });
   }
 
   async function downloadImage(path) {
@@ -53,7 +91,30 @@ export default function CreateCharacter() {
 
   function returnImage(kind) {
     const name = kind.name;
-    return hashTable[name]
+    switch (name) {
+      case 'clayfeet':
+        return clayfeetSprite;
+      case 'paladi':
+        return paladiSprite;
+      case 'flowerbud':
+        return flowerbudSprite;
+      case 'merperson':
+        return merpersonSprite;
+      case 'mogami':
+        return mogamiSprite;
+      case 'moonlit':
+        return moonlitSprite;
+      case 'blue folk':
+        return blueFolkSprite;
+      case 'blaoru':
+        return blaoruSprite;
+      case 'baego':
+        return baegoSprite;
+      case 'revenant':
+        return revenantSprite;
+      default:
+        break;
+    }
   }
 
   return (
@@ -66,7 +127,7 @@ export default function CreateCharacter() {
               <CharacterPortrait
                 htmlFor={`kind${index}`}
                 selected={kind.name === formData.kind}
-                image={kindImages}
+                image={returnImage(kind)}
                 create={true}
               >
                 <p>{kind.name}</p>
