@@ -5,8 +5,14 @@ import { CharacterPortrait } from '../../components/CharacterPortrait/style';
 
 import api from '../../services/api';
 
+import { supabase } from '../../services/supabaseClient';
+
 export default function CreateCharacter() {
-  const [kinds, setKinds] = useState([])
+  const hashtable = {};
+
+  const [kinds, setKinds] = useState([]);
+  const [kindBlobs, setKindBlobs] = useState({});
+
   const [formData, setFormData] = useState({
     kind: '',
     name: '',
@@ -16,13 +22,27 @@ export default function CreateCharacter() {
   useEffect(() => {
     async function getKinds() {
       const { data } = await api.getKinds();
-      setKinds(data)
+      setKinds(data);
     }
     getKinds();
-  }, [])
+  }, []);
 
-  
-  
+  useEffect(() => {
+    async function downloadImage(name) {
+      const { data } = await supabase.storage
+        .from('/public/marabahani/kinds')
+        .download(`${name}.png`);
+      const url = URL.createObjectURL(data);
+      hashtable[name] = url;
+    }
+    kinds.forEach(async (kind) => {
+      if (!hashtable[kind.name]) {
+        await downloadImage(kind.name);
+      }
+      setKindBlobs(hashtable); //por que as outras sprites so aparecem depois de clicar?
+    });
+  }, [kinds]);
+
   useEffect(() => {
     const width = 128 + formData.name.length * 16;
     setInputWidth(`${width}px`);
@@ -42,7 +62,7 @@ export default function CreateCharacter() {
               <CharacterPortrait
                 htmlFor={`kind${index}`}
                 selected={kind.name === formData.kind}
-                image={kind.spriteUrl}
+                image={kindBlobs[kind.name]}
                 create={true}
               >
                 <p>{kind.name}</p>
