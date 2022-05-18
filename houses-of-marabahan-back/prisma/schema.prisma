@@ -23,39 +23,38 @@ model House {
 }
 
 model Character {
-  id     Int    @id @default(autoincrement())
-  name   String
-  kindId Int
-  kind   Kind   @relation(fields: [kindId], references: [id])
+  id      Int    @id @default(autoincrement())
+  name    String
+  kindId  Int
+  kind    Kind   @relation(fields: [kindId], references: [id])
   houseId Int
-  house House @relation(fields: [houseId], references: [id])
-  seeks String
-  fears String
+  house   House  @relation(fields: [houseId], references: [id])
+  seeks   String
+  fears   String
 
-  inventory      Inventory[]
+  inventory Inventory[]
 
   @@map("characters")
 }
 
-
-
 model Kind {
   id        Int    @id @default(autoincrement())
-  name      String
+  name      String @unique
   spriteUrl String
+  description String
 
   character Character[]
   @@map("kinds")
 }
 
 model Item {
-  id        Int    @id @default(autoincrement())
-  name      String
-  spriteUrl String
+  id          Int    @id @default(autoincrement())
+  name        String
+  spriteUrl   String
   description String
 
   inventoryItem InventoryItem[]
-  houseItem HouseItem[]
+  houseItem     HouseItem[]
 
   @@map("items")
 }
@@ -81,11 +80,11 @@ model InventoryItem {
 }
 
 model HouseItem {
-  id Int @id @default(autoincrement())
+  id      Int   @id @default(autoincrement())
   houseId Int
-  house House @relation(fields: [houseId], references: [id])
-  itemId Int
-  item Item @relation(fields: [itemId], references: [id])
+  house   House @relation(fields: [houseId], references: [id])
+  itemId  Int
+  item    Item  @relation(fields: [itemId], references: [id])
 
   @@map("houseItem")
 }

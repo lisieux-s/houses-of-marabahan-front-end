@@ -20,8 +20,13 @@ async function findHouseByName(name) {
     return await baseAPI.get(`/house/${name}`)
 }
 
+async function getKinds() {
+    return await baseAPI.get('/kinds');
+}
+
 const api = {
     findHouseByName,
-    signUp
+    signUp,
+    getKinds
 }
 export default api;
