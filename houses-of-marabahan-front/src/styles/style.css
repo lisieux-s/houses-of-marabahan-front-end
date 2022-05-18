@@ -37,7 +37,7 @@ body {
   align-items: center;
 
   margin-top: 102px;
-  margin-bottom: 64px;
+  /* margin-bottom: 64px; */
 }
 
 nav, footer {

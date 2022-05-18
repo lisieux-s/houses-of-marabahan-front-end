@@ -8,7 +8,7 @@ import DrivenPlus from './pages/Driven+';
 import NavBar from './components/NavBar';
 import LeftBar from './components/Sidebar/LeftBar';
 import RightBar from './components/Sidebar/RightBar';
-import Footer from './components/Footer';
+//import Footer from './components/Footer';
 
 export default function App() {
   return (
@@ -22,7 +22,7 @@ export default function App() {
         <Route path='/Driven+' element={<DrivenPlus />} />
       </Routes>
       <RightBar />
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   );
 }

@@ -13,7 +13,8 @@ const kinds = [
     {
         name: 'clayfeet',
         sprite: CLAYFEET,
-        description: 'Elusive shapeshifters molded out of clay.'
+        description: 'Elusive shapeshifters molded out of clay.',
+        path: 'https://xbwhocmjjpczpzjbwrxk.supabase.co/storage/v1/object/public/marabahani/kinds/clayfeet.png?t=2022-05-17T23:58:19.477Z'
     },
     {
         name: 'paladi',
@@ -36,29 +37,30 @@ const kinds = [
         description: 'Ceramic vessels that were guarded by dragons for 400 seasons.'
     },
     {
-        name: 'blue folk',
-        sprite: BLUE_FOLK,
-        description: 'The fierce and boisterous kind created by the goddess Maimu.'
-    },
-    {
         name: 'moonlit',
         sprite: MOONLIT,
         description: 'Servants of the Lunar Goddesses.'
+    },
+    {
+        name: 'blue folk',
+        sprite: BLUE_FOLK,
+        description: 'The fierce and boisterous kind created by the goddess Maimu.'
     },
     {
         name: 'blaoru',
         sprite: BLAORU,
         description: 'Forged from the fires of the Underworld, this kind is said to give the best hugs.'
     },
-    {
-        name: 'revenant',
-        sprite: ASHEN,
-        description: 'Vengeful spirits of the dead.'
-    },
+    
     {
         name: 'baego',
         sprite: BAEGO,
         description: `Assembled themselves from the spare pieces of the gods' creations.`
+    },
+    {
+        name: 'revenant',
+        sprite: ASHEN,
+        description: 'Vengeful spirits of the dead.'
     },
 ]
 

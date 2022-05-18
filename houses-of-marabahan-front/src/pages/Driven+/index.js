@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+
 import { supabase } from '../../services/supabaseClient';
 
 export default function DrivenPlus() {
@@ -10,7 +11,7 @@ export default function DrivenPlus() {
 
    async function downloadImage(path) {
       const { data } = await supabase.storage
-        .from('/public/marabahani')
+        .from('/public/marabahani/Driven+')
         .download(path);
       const url = URL.createObjectURL(data);
       setImageUrl(url);
