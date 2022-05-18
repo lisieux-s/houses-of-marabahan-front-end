@@ -29,9 +29,9 @@ export default function CreateHouse() {
       console.log(data)
       switch(id) {
         case 1:
-          setSwordImageUrl(data.spriteUrl); break;
-        case 2:
           setShovelImageUrl(data.spriteUrl); break;
+        case 2:
+          setSwordImageUrl(data.spriteUrl); break;
         case 3: 
           setKnittingKitImageUrl(data.spriteUrl); break
         default:
