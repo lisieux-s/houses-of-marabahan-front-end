@@ -13,48 +13,47 @@ export default function CreateCharacter() {
     name: '',
   });
   const [inputWidth, setInputWidth] = useState('500px');
-  const [kindImages, setKindImages] = useState(
-    {
-      clayfeet: '',
-      paladi: '',
-      flowerbud: '',
-      merperson: '',
-      mogami: '',
-      moonlit: '',
-      bluefolk: '',
-      blaoru: '',
-      baego: '',
-      revenant: ''
-    },
-  );
 
+  const hashTable = {}
+  const [kindImages, setKindImages] = useState({})
 
+  //dynamic input width
   useEffect(() => {
     const width = 128 + formData.name.length * 16;
     setInputWidth(`${width}px`);
   }, [formData.name]);
 
-  useEffect(() => {
-    kinds.map((kind) => getImage(kind));
-  }, []);
-
-  async function getImage(kind) {
-    const { data } = await supabase.storage
-      .from('public/marabahani/kinds')
-      .download(`${kind.name}.png`);
-    const url = URL.createObjectURL(data);
-    setKindImages({ ...kindImages, [kind.name]: url });
-  }
-
+  //form data
   function handleChange({ target }) {
     setFormData({ ...formData, [target.name]: target.value });
   }
 
+  //load sprites
+  useEffect(() => {
+    downloadImages();
+  }, [])
+
+
+  function downloadImages() {
+    kinds.forEach(async (kind) => {
+        const name = await kind.name;
+        const url = await downloadImage(name)
+        console.log(url)
+        if(url) setKindImages(name[url])
+        console.log(kindImages)
+    })
+  }
+
+  async function downloadImage(path) {
+    const { data } = await supabase.storage
+      .from('/public/marabahani/kinds')
+      .download(path + '.png');
+    return URL.createObjectURL(data);
+  }
+
   function returnImage(kind) {
     const name = kind.name;
-    console.log(name);
-    console.log(kindImages);
-    return kindImages.name;
+    return hashTable[name]
   }
 
   return (
@@ -67,7 +66,7 @@ export default function CreateCharacter() {
               <CharacterPortrait
                 htmlFor={`kind${index}`}
                 selected={kind.name === formData.kind}
-                image={() => (kindImages ? returnImage(kind) : '')}
+                image={kindImages}
                 create={true}
               >
                 <p>{kind.name}</p>
