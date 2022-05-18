@@ -9,6 +9,11 @@ export async function findByName(name: string) {
   return item;
 }
 
+export async function findById(id: number) {
+  const item = await itemRepository.findById(id);
+  if (!item) throw { type: 'NOT_FOUND', message: 'Item not found' };
+  return item;
+}
 export async function addToStorage(itemId: number, houseId: number) {
   await itemRepository.addToStorage(itemId, houseId);
 }

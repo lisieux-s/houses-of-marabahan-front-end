@@ -36,6 +36,11 @@ export async function findByName(name: string) {
     where: { name },
   });
 }
+export async function findById(id: number) {
+  return await prisma.item.findUnique({
+    where: { id },
+  });
+}
 
 export async function addToStorage(itemId: number, houseId: number) {
   await prisma.houseItem.create({
