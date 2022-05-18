@@ -49,7 +49,7 @@ model Kind {
 
 model Item {
   id          Int    @id @default(autoincrement())
-  name        String
+  name        String @unique
   spriteUrl   String
   description String
 

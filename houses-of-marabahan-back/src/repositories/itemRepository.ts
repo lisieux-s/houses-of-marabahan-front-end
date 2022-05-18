@@ -1,29 +1,50 @@
-import { prisma } from "../database.js";
+import { prisma } from '../database.js';
 
-import { CreateItemData } from "../services/itemService.js"; 
+import { CreateItemData } from '../services/itemService.js';
 
-async function create(createItemData: CreateItemData) {
-    await prisma.item.create({
-        data: {
-            name: createItemData.name,
-            spriteUrl: createItemData.spriteUrl,
-            description: createItemData.description
-        }
-    })
+export async function create(createItemData: CreateItemData) {
+  await prisma.item.create({
+    data: {
+      name: createItemData.name,
+      spriteUrl: createItemData.spriteUrl,
+      description: createItemData.description,
+    },
+  });
 }
 
-async function addToStorage(itemId: number, houseId: number) {
-    await prisma.houseItem.create({
-        data: {
-            itemId,
-            houseId
-        }
-    })
+export async function updateName(id: number, name: string) {
+  await prisma.item.update({
+    where: { id },
+    data: { name },
+  });
 }
-async function moveToStorage() {}
-async function addToInventory() {}
-async function moveToInventory() {}
+export async function updateSpriteUrl(id: number, spriteUrl: string) {
+  await prisma.item.update({
+    where: { id },
+    data: { spriteUrl },
+  });
+}
+export async function updateDescription(id: number, description: string) {
+  await prisma.item.update({
+    where: { id },
+    data: { description },
+  });
+}
 
-export default {
-    create, addToStorage
+export async function findByName(name: string) {
+  return await prisma.item.findUnique({
+    where: { name },
+  });
 }
+
+export async function addToStorage(itemId: number, houseId: number) {
+  await prisma.houseItem.create({
+    data: {
+      itemId,
+      houseId,
+    },
+  });
+}
+export async function moveToStorage() {}
+export async function addToInventory() {}
+export async function moveToInventory() {}

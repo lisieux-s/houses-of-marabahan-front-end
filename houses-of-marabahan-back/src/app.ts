@@ -5,7 +5,6 @@ import 'express-async-errors';
 
 import router from './routers/index.js'
 import { errorHandlerMiddleware } from './middlewares/errorHandlerMiddleware.js'
-import { prisma } from './database.js';
 
 dotenv.config();
 

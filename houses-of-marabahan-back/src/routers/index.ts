@@ -9,8 +9,9 @@ import creatorRouter from "./creatorRouter.js";
 
 const router = Router();
 router.use(houseRouter)
-router.use(creatorRouter)
 router.use(characterRouter)
 router.use(kindRouter)
+
+router.use(creatorRouter)
 
 export default router;

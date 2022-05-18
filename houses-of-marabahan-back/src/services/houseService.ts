@@ -3,8 +3,8 @@ import jwt from 'jsonwebtoken';
 
 import { House } from '@prisma/client';
 
-import houseRepository from '../repositories/houseRepository.js';
-import itemRepository from '../repositories/itemRepository.js';
+import * as houseRepository from '../repositories/houseRepository.js';
+import * as itemRepository from '../repositories/itemRepository.js';
 
 export type HouseData = Omit<House, 'id'>;
 
