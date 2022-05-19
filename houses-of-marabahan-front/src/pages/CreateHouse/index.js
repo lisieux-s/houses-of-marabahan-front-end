@@ -25,22 +25,25 @@ export default function CreateHouse() {
 
   useEffect(() => {
     async function getStarterItem(id) {
-      const { data } = await api.getItemById(id)
-      switch(id) {
+      const { data } = await api.getItemById(id);
+      switch (id) {
         case 1:
-          setShovelImageUrl(data.spriteUrl); break;
+          setShovelImageUrl(data.spriteUrl);
+          break;
         case 2:
-          setSwordImageUrl(data.spriteUrl); break;
-        case 3: 
-          setKnittingKitImageUrl(data.spriteUrl); break
+          setSwordImageUrl(data.spriteUrl);
+          break;
+        case 3:
+          setKnittingKitImageUrl(data.spriteUrl);
+          break;
         default:
           break;
       }
     }
-    for(let i = 1; i <= 3; i++) {
+    for (let i = 1; i <= 3; i++) {
       getStarterItem(i);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     const delay = setTimeout(async () => {
@@ -72,17 +75,15 @@ export default function CreateHouse() {
       password: formData.password,
     };
     const starterItem = formData.starterItem;
+    try {
 
-    await api.signUp({
-      houseData,
-      starterItem,
-    });
+      await api.signUp({
+        houseData,
+        starterItem,
+      });
 
-    //log in with data,
-    //store stuff in localStorage,
-    //send to home and prompt character creation
-
-    navigate('/home');
+      navigate('/home');
+    } catch (error) {}
   }
 
   function checkPasswordConfirmation() {

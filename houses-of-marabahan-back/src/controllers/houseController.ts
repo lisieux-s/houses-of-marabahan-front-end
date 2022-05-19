@@ -20,6 +20,9 @@ export async function signIn(req: Request, res: Response) {
 export async function checkNameAvailability(req: Request, res: Response) {
   const { name } = req.params;
   const result = await houseService.findByName(name);
-  if (result) return res.send(name);
+  if (result) return res.send({
+    id: result.id,
+    name: result.name
+  });
   res.send(false);
 }

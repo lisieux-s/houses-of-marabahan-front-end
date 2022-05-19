@@ -2,24 +2,32 @@ import { useState, createContext } from 'react';
 
 export const HouseContext = createContext(null)
 
-const HOUSE_KEY = 'marabahani-house';
-const localHouse = localStorage.getItem(HOUSE_KEY)
+const HOUSE_ID_KEY = 'marabahani-house-id';
+const HOUSE_NAME_KEY = 'marabahani-house-name'
+const localHouseId = localStorage.getItem(HOUSE_ID_KEY)
+const localHouseName = localStorage.getItem(HOUSE_NAME_KEY)
 
 export function HouseProvider({ children }) {
-    const [house, setHouse] = useState(localHouse);
+    const [houseId, setHouseId] = useState(localHouseId);
+    const [houseName, setHouseName] = useState(localHouseName);
 
-    function storeHouseData(house) {
-        setHouse(house)
-        localStorage.setItem(HOUSE_KEY, house)
+    function storeHouseData(data) {
+        setHouseId(data.id)
+        setHouseName(data.name)
+        localStorage.setItem(HOUSE_ID_KEY, JSON.stringify(data.id))
+        localStorage.setItem(HOUSE_NAME_KEY, JSON.stringify(data.name))
+
     }
 
     function removeHouseData() {
-        setHouse(null)
-        localStorage.removeItem(HOUSE_KEY)
+        setHouseId(null);
+        localStorage.removeItem(HOUSE_ID_KEY)
+        localStorage.removeItem(HOUSE_NAME_KEY)
     }
 
+ 
     return(
-        <HouseContext.Provider value={{ house, storeHouseData, removeHouseData }}>
+        <HouseContext.Provider value={{ houseId, houseName, storeHouseData, removeHouseData }}>
             {children}
         </HouseContext.Provider>
     )

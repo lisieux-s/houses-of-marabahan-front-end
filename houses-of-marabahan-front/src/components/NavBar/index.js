@@ -19,7 +19,8 @@ export default function NavBar() {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
 
   const { token } = useAuth();
-  const { house } = useHouse();
+  const { houseName } = useHouse();
+
 
   return (
     <>
@@ -30,7 +31,7 @@ export default function NavBar() {
         </Link>
         {token ? (
           <button onClick={() => setMenuIsOpen(!menuIsOpen)}>
-            House of {house}
+            House of {JSON.parse(houseName)}
             <Dropdown isOpen={menuIsOpen}>
               <li><SignOut /></li>
             </Dropdown>

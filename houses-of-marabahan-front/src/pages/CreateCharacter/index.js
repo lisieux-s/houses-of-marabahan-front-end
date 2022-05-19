@@ -3,11 +3,15 @@ import { useState, useEffect } from 'react';
 import { Selection } from '../../components/Selection/style';
 import { CharacterPortrait } from '../../components/CharacterPortrait/style';
 
+import useHouse from '../../hooks/useHouse';
+
 import api from '../../services/api';
 
 import { supabase } from '../../services/supabaseClient';
 
 export default function CreateCharacter() {
+  const { house } = useHouse();
+
   const hashtable = {};
 
   const [kinds, setKinds] = useState([]);
@@ -16,6 +20,8 @@ export default function CreateCharacter() {
   const [formData, setFormData] = useState({
     kind: '',
     name: '',
+    seeks: '',
+    fears: '',
   });
   const [inputWidth, setInputWidth] = useState('500px');
 
@@ -79,10 +85,20 @@ export default function CreateCharacter() {
         </Selection>
 
         <h3>What do you seek?</h3>
-        <input />
+        <input
+          type='text'
+          value={formData.seeks}
+          name='seeks'
+          onChange={(e) => handleChange(e)}
+        />
 
         <h3>What do you fear?</h3>
-        <input />
+        <input
+          type='text'
+          value={formData.fears}
+          name='fears'
+          onChange={(e) => handleChange(e)}
+        />
 
         <h3>What is your name?</h3>
         <input
@@ -92,7 +108,7 @@ export default function CreateCharacter() {
           style={{ width: inputWidth, textAlign: 'center', fontSize: '36px' }}
           onChange={(e) => handleChange(e)}
         />
-        <button>Join house</button>
+        <button>Join the House of {house}</button>
       </form>
     </main>
   );
