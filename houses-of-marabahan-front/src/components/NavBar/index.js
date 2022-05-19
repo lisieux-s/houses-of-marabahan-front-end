@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-
 import { StyledNav } from './style';
 import { Dropdown } from '../Dropdown/style';
 import SignIn from '../SignIn';
@@ -10,9 +9,7 @@ import SignOut from '../SignOut';
 import LOGO from '../../assets/logo.png';
 
 import useAuth from '../../hooks/useAuth';
-import useHouse from '../../hooks/useHouse';
-
-
+import { useEffect } from 'react/cjs/react.production.min';
 
 export default function NavBar() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -20,8 +17,10 @@ export default function NavBar() {
 
   const { token } = useAuth();
 
-  const houseName = JSON.parse(localStorage.getItem("marabahani-house-name"))
-
+  let houseName = '';
+  if (localStorage.getItem('marabahani-house-name')?.length > 1) {
+    houseName = JSON.parse(localStorage.getItem('marabahani-house-name'));
+  }
   return (
     <>
       <StyledNav>
@@ -33,7 +32,9 @@ export default function NavBar() {
           <button onClick={() => setMenuIsOpen(!menuIsOpen)}>
             House of {houseName}
             <Dropdown isOpen={menuIsOpen}>
-              <li><SignOut /></li>
+              <li>
+                <SignOut />
+              </li>
             </Dropdown>
           </button>
         ) : (

@@ -8,7 +8,7 @@ import useHouse from '../../hooks/useHouse'
 
 import api from '../../services/api';
 
-export default function SignIn({ modalIsOpen, setModalIsOpen }) {
+export default function SignIn({ message, modalIsOpen, setModalIsOpen }) {
   const navigate = useNavigate();
   const { signIn } = useAuth();
   const { storeHouseData } = useHouse();
@@ -37,7 +37,7 @@ export default function SignIn({ modalIsOpen, setModalIsOpen }) {
 
 
       setModalIsOpen(false);
-      navigate('/home');
+      if(!message) navigate('/home');
     } catch (error) {
       console.log(error);
     }
@@ -50,6 +50,7 @@ export default function SignIn({ modalIsOpen, setModalIsOpen }) {
 
   return (
     <Modal isOpen={modalIsOpen}>
+      <p className='alert'>{message}</p>
       <form onSubmit={(e) => handleModalSubmit(e)}>
         <input
           placeholder='name of your house'

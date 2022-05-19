@@ -4,10 +4,17 @@ import { useNavigate } from 'react-router-dom';
 import { Square } from '../../components/Square/style';
 import { Selection } from '../../components/Selection/style';
 
+import useAuth from '../../hooks/useAuth'
+import useHouse from '../../hooks/useHouse'
+
 import api from '../../services/api';
 
 export default function CreateHouse() {
   const navigate = useNavigate();
+
+  const { signIn } = useAuth();
+  const { storeHouseData } = useHouse();
+
   const [shovelImageUrl, setShovelImageUrl] = useState('');
   const [swordImageUrl, setSwordImageUrl] = useState('');
   const [knittingKitImageUrl, setKnittingKitImageUrl] = useState('');
@@ -81,8 +88,13 @@ export default function CreateHouse() {
         houseData,
         starterItem,
       });
+      const { data } = await api.findHouseByName(houseData.name);
+      const token = await api.signIn({ name: houseData.name, password: houseData.password });
+      signIn(token);
+      console.log(data)
+      storeHouseData(data)
 
-      navigate('/home');
+      navigate('/create/character');
     } catch (error) {}
   }
 

@@ -1,7 +1,11 @@
 import { Sidebar } from "../style";
 import CharacterCard from "../../CharacterCard";
 
-export default function LeftBar({ token }) {
+import useAuth from "../../../hooks/useAuth";
+
+export default function LeftBar() {
+    const { token } = useAuth();
+
     if(!token) return '';
     return(
         <Sidebar left={true}>

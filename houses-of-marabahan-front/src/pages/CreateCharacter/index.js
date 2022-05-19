@@ -1,20 +1,25 @@
 import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { Selection } from '../../components/Selection/style';
 import { CharacterPortrait } from '../../components/CharacterPortrait/style';
 
-import useAuth from '../../hooks/useAuth'
+import useAuth from '../../hooks/useAuth';
 import useHouse from '../../hooks/useHouse';
 
 import api from '../../services/api';
 
 import { supabase } from '../../services/supabaseClient';
+import SignIn from '../../components/SignIn';
 
 export default function CreateCharacter() {
   const { token } = useAuth();
   const { houseId } = useHouse();
-  
-  const houseName = JSON.parse(localStorage.getItem('marabahani-house-name'))
+
+  let houseName = '';
+  if (localStorage.getItem('marabahani-house-name')?.length > 1) {
+    houseName = JSON.parse(localStorage.getItem('marabahani-house-name'));
+  }
 
   const hashtable = {};
 
@@ -28,6 +33,8 @@ export default function CreateCharacter() {
     fears: '',
   });
   const [inputWidth, setInputWidth] = useState('500px');
+
+  const [modalIsOpen, setModalIsOpen] = useState(true)
 
   useEffect(() => {
     async function getKinds() {
@@ -47,11 +54,10 @@ export default function CreateCharacter() {
     }
 
     async function populateKindBlobs() {
-      for(let kind of kinds) {
+      for (let kind of kinds) {
         if (!hashtable[kind.name]) {
-              await downloadImage(kind.name);
-            }
-            
+          await downloadImage(kind.name);
+        }
       }
       setKindBlobs(hashtable);
     }
@@ -69,15 +75,23 @@ export default function CreateCharacter() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    await api.createCharacter(formData, houseId, token)
+    await api.createCharacter(formData, houseId, token);
   }
+
+  if (!token)
+    return (
+      <SignIn
+        message={'Please sign in before creating a character!'}
+        modalIsOpen={modalIsOpen}
+        setModalIsOpen={setModalIsOpen}
+      />
+    );
 
   return (
     <main>
       <form onSubmit={(e) => handleSubmit(e)}>
         <h3>What is your kind?</h3>
         <Selection>
-          
           {kinds.map((kind, index) => (
             <div key={index}>
               <CharacterPortrait

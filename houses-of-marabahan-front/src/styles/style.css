@@ -107,6 +107,11 @@ h3:first-of-type {
   margin-top: 0;
 }
 
+.alert {
+  color: rgb(255, 0, 0);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, .5);
+}
+
 
 @media (max-width: 600px) {
   
