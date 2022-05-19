@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Selection } from '../../components/Selection/style';
 import { CharacterPortrait } from '../../components/CharacterPortrait/style';
 
+import useAuth from '../../hooks/useAuth'
 import useHouse from '../../hooks/useHouse';
 
 import api from '../../services/api';
@@ -10,7 +11,10 @@ import api from '../../services/api';
 import { supabase } from '../../services/supabaseClient';
 
 export default function CreateCharacter() {
-  const { house } = useHouse();
+  const { token } = useAuth();
+  const { houseId } = useHouse();
+  const { houseName } = useHouse();
+
 
   const hashtable = {};
 
@@ -18,7 +22,7 @@ export default function CreateCharacter() {
   const [kindBlobs, setKindBlobs] = useState({});
 
   const [formData, setFormData] = useState({
-    kind: '',
+    kindId: '',
     name: '',
     seeks: '',
     fears: '',
@@ -58,16 +62,22 @@ export default function CreateCharacter() {
     setFormData({ ...formData, [target.name]: target.value });
   }
 
+  async function handleSubmit(e) {
+    e.preventDefault();
+    await api.createCharacter(formData, houseId, token)
+  }
+
   return (
     <main>
-      <form>
+      <form onSubmit={(e) => handleSubmit(e)}>
         <h3>What is your kind?</h3>
         <Selection>
+          
           {kinds.map((kind, index) => (
             <div key={index}>
               <CharacterPortrait
                 htmlFor={`kind${index}`}
-                selected={kind.name === formData.kind}
+                selected={parseInt(kind.id) === parseInt(formData.kindId)}
                 image={kindBlobs[kind.name]}
                 create={true}
               >
@@ -76,8 +86,8 @@ export default function CreateCharacter() {
               <input
                 id={`kind${index}`}
                 type='radio'
-                value={kind.name}
-                name='kind'
+                value={kind.id}
+                name='kindId'
                 onChange={(e) => handleChange(e)}
               />
             </div>
@@ -108,7 +118,7 @@ export default function CreateCharacter() {
           style={{ width: inputWidth, textAlign: 'center', fontSize: '36px' }}
           onChange={(e) => handleChange(e)}
         />
-        <button>Join the House of {house}</button>
+        <button>Join the House of {JSON.parse(houseName)}</button>
       </form>
     </main>
   );

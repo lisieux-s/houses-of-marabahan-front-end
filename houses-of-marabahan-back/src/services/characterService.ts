@@ -5,7 +5,7 @@ import * as characterRepository from '../repositories/characterRepository.js';
 export type CharacterData = Omit<Character, 'id'>;
 
 export async function create(characterData: CharacterData) {
-  if (findCharacter)
+  if (await findCharacter(characterData))
     throw {
       type: 'CONFLICT',
       message: 'Character with this name already exists in this house',

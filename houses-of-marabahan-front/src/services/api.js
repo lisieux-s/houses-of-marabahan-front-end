@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const baseAPI = axios.create({
-  baseURL: 'http://localhost:5000/',
+  baseURL: 'http://localhost:5000',
 });
 
 function getConfig(token) {
@@ -29,11 +29,16 @@ async function getKinds() {
 }
 
 async function getItemByName(name) {
-    return await baseAPI.get(`item/${name}`);
+    return await baseAPI.get(`/item/${name}`);
 }
 
 async function getItemById(id) {
-    return await baseAPI.get(`item/id/${id}`)
+    return await baseAPI.get(`/item/id/${id}`)
+}
+
+async function createCharacter(data, id, token) {
+    getConfig(token);
+    await baseAPI.post(`/house/${id}/create/character`, data, token)
 }
 
 const api = {
@@ -42,6 +47,7 @@ const api = {
     signIn,
     getKinds,
     getItemByName,
-    getItemById
+    getItemById,
+    createCharacter
 }
 export default api;
