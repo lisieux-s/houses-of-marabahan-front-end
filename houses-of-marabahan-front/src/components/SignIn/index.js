@@ -31,10 +31,11 @@ export default function SignIn({ modalIsOpen, setModalIsOpen }) {
     e.preventDefault();
     try {
       const { data } = await api.signIn(formData);
-      const name = await getHouse();
+      const houseData = await getHouse();
       signIn(data.token);
-      storeHouseData(name)
-      
+      storeHouseData(houseData)
+
+
       setModalIsOpen(false);
       navigate('/home');
     } catch (error) {

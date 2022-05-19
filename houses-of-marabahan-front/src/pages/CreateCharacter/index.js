@@ -13,8 +13,8 @@ import { supabase } from '../../services/supabaseClient';
 export default function CreateCharacter() {
   const { token } = useAuth();
   const { houseId } = useHouse();
-  const { houseName } = useHouse();
-
+  
+  const houseName = JSON.parse(localStorage.getItem('marabahani-house-name'))
 
   const hashtable = {};
 
@@ -45,12 +45,17 @@ export default function CreateCharacter() {
       const url = URL.createObjectURL(data);
       hashtable[name] = url;
     }
-    kinds.forEach(async (kind) => {
-      if (!hashtable[kind.name]) {
-        await downloadImage(kind.name);
+
+    async function populateKindBlobs() {
+      for(let kind of kinds) {
+        if (!hashtable[kind.name]) {
+              await downloadImage(kind.name);
+            }
+            
       }
-      setKindBlobs(hashtable); //por que as outras sprites so aparecem depois de clicar?
-    });
+      setKindBlobs(hashtable);
+    }
+    populateKindBlobs();
   }, [kinds]);
 
   useEffect(() => {
@@ -118,7 +123,7 @@ export default function CreateCharacter() {
           style={{ width: inputWidth, textAlign: 'center', fontSize: '36px' }}
           onChange={(e) => handleChange(e)}
         />
-        <button>Join the House of {JSON.parse(houseName)}</button>
+        <button>Join the House of {houseName}</button>
       </form>
     </main>
   );
