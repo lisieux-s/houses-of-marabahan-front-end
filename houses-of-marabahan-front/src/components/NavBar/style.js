@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const StyledNav = styled.nav`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 
   position: fixed;
@@ -19,4 +19,8 @@ export const StyledNav = styled.nav`
     rgba(255, 255, 255, 0.5) 20%,
     rgba(255, 255, 255, 1) 50%
   );
+
+  button {
+    width: 20%;
+  }
 `;

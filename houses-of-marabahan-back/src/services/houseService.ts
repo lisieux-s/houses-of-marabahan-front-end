@@ -35,7 +35,8 @@ export async function signUp(createHouseData: HouseData, item: string) {
 
 export async function signIn(signInData: HouseData) {
   const house = await getHouseOrFail(signInData);
-  return jwt.sign({ houseId: house.id }, process.env.JWT_SECRET);
+  const token = jwt.sign({ houseId: house.id }, process.env.JWT_SECRET);
+  return token;
 }
 
 async function getHouseOrFail(signInData: HouseData) {

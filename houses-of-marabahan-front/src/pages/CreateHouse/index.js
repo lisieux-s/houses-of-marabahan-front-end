@@ -21,12 +21,11 @@ export default function CreateHouse() {
   const [inputWidth, setInputWidth] = useState('500px');
 
   //add function for filtering names (length, allowed characters...)
-  //add tooltip for cases when name is unavailable
+  //add context for leftbar for cases when name is unavailable
 
   useEffect(() => {
     async function getStarterItem(id) {
       const { data } = await api.getItemById(id)
-      console.log(data)
       switch(id) {
         case 1:
           setShovelImageUrl(data.spriteUrl); break;

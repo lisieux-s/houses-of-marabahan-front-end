@@ -16,6 +16,10 @@ async function signUp(data) {
     await baseAPI.post('/sign-up', data);
 }
 
+async function signIn(data) {
+    return await baseAPI.post('/sign-in', data);
+}
+
 async function findHouseByName(name) {
     return await baseAPI.get(`/house/${name}`)
 }
@@ -35,6 +39,7 @@ async function getItemById(id) {
 const api = {
     findHouseByName,
     signUp,
+    signIn,
     getKinds,
     getItemByName,
     getItemById

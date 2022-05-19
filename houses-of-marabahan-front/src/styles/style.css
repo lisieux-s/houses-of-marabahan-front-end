@@ -11,6 +11,8 @@
 }
 
 .logo {
+
+  top: 0;
   width: 500px;
   height: 102px;
   filter: brightness(0);
