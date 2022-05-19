@@ -21,6 +21,7 @@ export const StyledNav = styled.nav`
   );
 
   button {
+    position: relative;
     width: 20%;
   }
 `;
