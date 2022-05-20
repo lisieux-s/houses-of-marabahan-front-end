@@ -13,3 +13,9 @@ export async function findByName(name: string) {
         where: { name }
     })
 }
+
+export async function findById(id: number) {
+    return prisma.house.findUnique({
+        where: { id }
+    })
+}

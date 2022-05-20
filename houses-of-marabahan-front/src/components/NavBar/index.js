@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { StyledNav } from './style';
 import { Dropdown } from '../Dropdown/style';
@@ -9,7 +9,6 @@ import SignOut from '../SignOut';
 import LOGO from '../../assets/logo.png';
 
 import useAuth from '../../hooks/useAuth';
-import { useEffect } from 'react/cjs/react.production.min';
 
 export default function NavBar() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -23,7 +22,7 @@ export default function NavBar() {
   }
   return (
     <>
-      <StyledNav>
+      <StyledNav hideButton={useLocation().pathname === '/create/character'}>
         <button></button>
         <Link to='/home'>
           <img className='logo' src={LOGO} alt='Houses of Marabahan' />

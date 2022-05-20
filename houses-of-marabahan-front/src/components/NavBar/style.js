@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const StyledNav = styled.nav`
   display: flex;
-  justify-content: space-between;
+  justify-content: ${props => props.hideButton? 'center' : 'space-between'};
   align-items: center;
 
   position: fixed;
@@ -21,6 +21,7 @@ export const StyledNav = styled.nav`
   );
 
   button {
+    display: ${props => props.hideButton? 'none' : 'block'};
     position: relative;
     width: 20%;
   }

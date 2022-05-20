@@ -22,3 +22,22 @@ export async function createCharacter(req: Request, res: Response) {
   });
   res.sendStatus(201);
 }
+
+export async function setAsActive(req: Request, res: Response) {
+  const houseId = req.params.id;
+  const { characterId } = req.body;
+  const houseIdNumber = parseInt(houseId);
+  const characterIdNumber = parseInt(characterId)
+
+  await characterService.setAsActive(houseIdNumber, characterIdNumber)
+  res.send(200);
+}
+
+export async function findActiveCharacter(req: Request, res: Response) {
+  const id = req.params.id;
+
+  const houseIdNumber = parseInt(id);
+
+  const character = await characterService.getActiveCharacter(houseIdNumber)
+  res.send(character);
+}

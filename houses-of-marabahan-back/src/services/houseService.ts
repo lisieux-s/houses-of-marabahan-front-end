@@ -12,6 +12,15 @@ export async function findByName(name: string) {
   return await houseRepository.findByName(name);
 }
 
+export async function findById(id: number) {
+  const house = await houseRepository.findById(id);
+  if(!house) throw {
+    type: 'NOT_FOUND',
+    message: 'No such house'
+  }
+  return house;
+}
+
 export async function signUp(createHouseData: HouseData, item: string) {
   if (await findByName(createHouseData.name)) {
     throw {

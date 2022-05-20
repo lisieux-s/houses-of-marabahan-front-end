@@ -41,6 +41,11 @@ async function createCharacter(data, id, token) {
     await baseAPI.post(`/house/${id}/create/character`, data, token)
 }
 
+async function getActiveCharacter(id, token) {
+    getConfig(token);
+    return await baseAPI.get(`/house/${id}/get/active-character`, token);
+}
+
 const api = {
     findHouseByName,
     signUp,
@@ -48,6 +53,7 @@ const api = {
     getKinds,
     getItemByName,
     getItemById,
-    createCharacter
+    createCharacter,
+    getActiveCharacter
 }
 export default api;

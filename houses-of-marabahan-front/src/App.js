@@ -5,6 +5,9 @@ import CreateHouse from './pages/CreateHouse';
 import Home from './pages/Home';
 import DrivenPlus from './pages/Driven+';
 
+import Items from './pages/CreatorPages/Items';
+import Kinds from './pages/CreatorPages/Kinds';
+
 import NavBar from './components/NavBar';
 import LeftBar from './components/Sidebar/LeftBar';
 import RightBar from './components/Sidebar/RightBar';

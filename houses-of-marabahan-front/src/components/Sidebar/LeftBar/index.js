@@ -4,6 +4,7 @@ import CharacterCard from "../../CharacterCard";
 import useAuth from "../../../hooks/useAuth";
 
 export default function LeftBar() {
+    
     const { token } = useAuth();
 
     if(!token) return '';
