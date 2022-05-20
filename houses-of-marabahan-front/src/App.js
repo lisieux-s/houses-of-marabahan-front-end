@@ -28,6 +28,8 @@ export default function App() {
             <Route path='/create/house' element={<CreateHouse />} />
             <Route path='/home' element={<Home />} />
             <Route path='/Driven+' element={<DrivenPlus />} />
+            <Route path='/items' element={<Items />} />
+            <Route path='/kinds' element={<Kinds />} />
           </Routes>
           <RightBar />
           {/* <Footer /> */}

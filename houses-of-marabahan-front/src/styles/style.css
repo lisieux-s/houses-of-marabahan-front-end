@@ -75,7 +75,7 @@ input {
   padding: 16px;
 }
 
-input[type='radio'] {
+input[type='radio'], input[type='file'] {
   display: none;
 }
 

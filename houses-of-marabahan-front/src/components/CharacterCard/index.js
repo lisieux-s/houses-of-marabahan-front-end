@@ -25,7 +25,7 @@ export default function CharacterCard() {
       setCharacter(data);
     }
     getCharacterData();
-  }, []);
+  }, [houseId]);
 
   useEffect(() => {
     async function downloadImage(path) {
