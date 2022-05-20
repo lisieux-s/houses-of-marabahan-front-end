@@ -23,7 +23,7 @@ export default function NavBar() {
   return (
     <>
       <StyledNav hideButton={useLocation().pathname === '/create/character'}>
-        <button></button>
+        <div></div>
         <Link to='/home'>
           <img className='logo' src={LOGO} alt='Houses of Marabahan' />
         </Link>

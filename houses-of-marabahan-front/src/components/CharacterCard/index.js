@@ -4,14 +4,17 @@ import { Card } from './style';
 import { CharacterPortrait } from '../CharacterPortrait/style';
 
 import useAuth from '../../hooks/useAuth';
-import useHouse from '../../hooks/useHouse';
 
 import api from '../../services/api';
 import { supabase } from '../../services/supabaseClient';
 
 export default function CharacterCard() {
   const { token } = useAuth();
-  const { houseId } = useHouse();
+
+  let houseId = '';
+  if (localStorage.getItem('marabahani-house-id')?.length > 1) {
+    houseId = JSON.parse(localStorage.getItem('marabahani-house-id'));
+  }
 
   const [character, setCharacter] = useState(null);
   const [characterImage, setCharacterImage] = useState(null);
@@ -72,6 +75,7 @@ export default function CharacterCard() {
     <Card>
       <CharacterPortrait image={characterImage}></CharacterPortrait>
       <h4>{character?.name}</h4>
+      <p>active character</p>
     </Card>
   );
 }

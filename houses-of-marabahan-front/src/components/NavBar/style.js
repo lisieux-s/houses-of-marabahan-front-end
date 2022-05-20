@@ -20,6 +20,11 @@ export const StyledNav = styled.nav`
     rgba(255, 255, 255, 1) 50%
   );
 
+  div {
+    display: ${props => props.hideButton? 'none' : 'block'};
+    width: 20%;
+  }
+
   button {
     display: ${props => props.hideButton? 'none' : 'block'};
     position: relative;

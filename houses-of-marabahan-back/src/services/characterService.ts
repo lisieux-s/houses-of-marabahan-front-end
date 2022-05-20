@@ -1,7 +1,7 @@
 import { Character } from '@prisma/client';
 
 import * as characterRepository from '../repositories/characterRepository.js';
-import * as houseService from '../services/houseService.js'
+import * as houseService from '../services/houseService.js';
 
 export type CharacterData = Omit<Character, 'id' | 'active'>;
 
@@ -11,6 +11,7 @@ export async function create(characterData: CharacterData) {
       type: 'CONFLICT',
       message: 'Character with this name already exists in this house',
     };
+  await characterRepository.removeActiveCharacter(characterData.houseId);
   await characterRepository.create(characterData);
 }
 
@@ -20,10 +21,11 @@ export async function findByName(characterData: CharacterData) {
 
 export async function findById(id: number) {
   const character = await characterRepository.findCharacterById(id);
-  if(!character) throw {
-    type: 'NOT_FOUND',
-    message: 'No such character'
-  }
+  if (!character)
+    throw {
+      type: 'NOT_FOUND',
+      message: 'No such character',
+    };
   return character;
 }
 
@@ -36,9 +38,10 @@ export async function setAsActive(houseId: number, characterId: number) {
 
 export async function getActiveCharacter(houseId: number) {
   const character = await characterRepository.getActiveCharacter(houseId);
-  if(!character) throw {
-    type: 'NOT_FOUND',
-    message: 'No active character found for this house'
-  }
+  if (!character)
+    throw {
+      type: 'NOT_FOUND',
+      message: 'No active character found for this house',
+    };
   return character;
 }
