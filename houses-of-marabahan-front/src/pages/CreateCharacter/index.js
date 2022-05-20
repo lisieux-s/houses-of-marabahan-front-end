@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { Selection } from '../../components/Selection/style';
 import { CharacterPortrait } from '../../components/CharacterPortrait/style';
@@ -13,6 +13,8 @@ import { supabase } from '../../services/supabaseClient';
 import SignIn from '../../components/SignIn';
 
 export default function CreateCharacter() {
+  const navigate = useNavigate();
+
   const { token } = useAuth();
   const { houseId } = useHouse();
 
@@ -76,6 +78,7 @@ export default function CreateCharacter() {
   async function handleSubmit(e) {
     e.preventDefault();
     await api.createCharacter(formData, houseId, token);
+    navigate('/home')
   }
 
   if (!token)
