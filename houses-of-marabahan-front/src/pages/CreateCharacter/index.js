@@ -139,6 +139,7 @@ export default function CreateCharacter() {
           name='name'
           style={{ width: inputWidth, textAlign: 'center', fontSize: '36px' }}
           onChange={(e) => handleChange(e)}
+          required
         />
         <button>Join the House of {houseName}</button>
       </form>

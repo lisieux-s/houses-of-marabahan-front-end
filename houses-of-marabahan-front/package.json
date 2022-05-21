@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.8.0",
     "@supabase/supabase-js": "^1.35.3",
     "axios": "^0.27.2",
     "react": "^17.0.2",
