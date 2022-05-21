@@ -49,6 +49,7 @@ export async function signIn(signInData: HouseData) {
 }
 
 async function getHouseOrFail(signInData: HouseData) {
+  console.log(signInData.name)
   const house = await findByName(signInData.name);
   if (!house) throw { type: 'UNAUTHORIZED', message: 'There is no such house' };
   if (!bcrypt.compareSync(signInData.password, house.password))

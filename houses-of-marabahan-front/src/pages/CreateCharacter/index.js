@@ -6,6 +6,7 @@ import { CharacterPortrait } from '../../components/CharacterPortrait/style';
 
 import useAuth from '../../hooks/useAuth';
 import useHouse from '../../hooks/useHouse';
+import useCharacter from '../../hooks/useCharacter';
 
 import api from '../../services/api';
 
@@ -17,6 +18,7 @@ export default function CreateCharacter() {
 
   const { token } = useAuth();
   const { houseId } = useHouse();
+  const { storeActiveCharacterData } = useCharacter()
 
   let houseName = '';
   if (localStorage.getItem('marabahani-house-name')?.length > 1) {
@@ -36,7 +38,7 @@ export default function CreateCharacter() {
   });
   const [inputWidth, setInputWidth] = useState('500px');
 
-  const [modalIsOpen, setModalIsOpen] = useState(true)
+  const [modalIsOpen, setModalIsOpen] = useState(true);
 
   useEffect(() => {
     async function getKinds() {
@@ -78,7 +80,8 @@ export default function CreateCharacter() {
   async function handleSubmit(e) {
     e.preventDefault();
     await api.createCharacter(formData, houseId, token);
-    navigate('/home')
+    storeActiveCharacterData(formData)
+    navigate('/home');
   }
 
   if (!token)

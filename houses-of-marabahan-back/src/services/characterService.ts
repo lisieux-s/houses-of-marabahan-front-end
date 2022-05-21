@@ -12,7 +12,11 @@ export async function create(characterData: CharacterData) {
       message: 'Character with this name already exists in this house',
     };
   await characterRepository.removeActiveCharacter(characterData.houseId);
+  
+  
   await characterRepository.create(characterData);
+  const character = await findByName(characterData);
+  await characterRepository.addActiveCharacter(character.id)
 }
 
 export async function findByName(characterData: CharacterData) {
@@ -43,5 +47,6 @@ export async function getActiveCharacter(houseId: number) {
       type: 'NOT_FOUND',
       message: 'No active character found for this house',
     };
+    console.log(character)
   return character;
 }

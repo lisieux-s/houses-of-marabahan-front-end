@@ -4,12 +4,15 @@ import { Card } from './style';
 import { CharacterPortrait } from '../CharacterPortrait/style';
 
 import useAuth from '../../hooks/useAuth';
+import useCharacter from '../../hooks/useCharacter';
 
 import api from '../../services/api';
 import { supabase } from '../../services/supabaseClient';
 
 export default function CharacterCard() {
   const { token } = useAuth();
+  const { activeCharacterName } = useCharacter()
+  console.log(activeCharacterName)
 
   let houseId = '';
   if (localStorage.getItem('marabahani-house-id')?.length > 1) {
@@ -23,9 +26,10 @@ export default function CharacterCard() {
     async function getCharacterData() {
       const { data } = await api.getActiveCharacter(houseId, token);
       setCharacter(data);
+      
     }
     getCharacterData();
-  }, [houseId]);
+  }, [houseId, token, activeCharacterName]);
 
   useEffect(() => {
     async function downloadImage(path) {

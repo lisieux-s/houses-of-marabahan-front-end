@@ -14,12 +14,14 @@ import RightBar from './components/Sidebar/RightBar';
 
 import { AuthProvider } from './contexts/AuthContext';
 import { HouseProvider } from './contexts/HouseContext';
+import { CharacterProvider } from './contexts/CharacterContext';
 //import Footer from './components/Footer';
 
 export default function App() {
   return (
     <AuthProvider>
       <HouseProvider>
+        <CharacterProvider>
         <BrowserRouter>
           <NavBar />
           <LeftBar />
@@ -34,6 +36,7 @@ export default function App() {
           <RightBar />
           {/* <Footer /> */}
         </BrowserRouter>
+        </CharacterProvider>
       </HouseProvider>
     </AuthProvider>
   );
