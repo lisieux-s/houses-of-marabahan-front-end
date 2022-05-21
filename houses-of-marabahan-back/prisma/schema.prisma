@@ -41,7 +41,6 @@ model Character {
 model Kind {
   id        Int    @id @default(autoincrement())
   name      String @unique
-  spritePath String
   description String
 
   character Character[]
@@ -50,14 +49,24 @@ model Kind {
 
 model Item {
   id          Int    @id @default(autoincrement())
+  categoryId Int?
+  category Category? @relation(fields: [categoryId], references: [id])
   name        String @unique
-  spritePath   String
   description String
 
   inventoryItem InventoryItem[]
   houseItem     HouseItem[]
 
   @@map("items")
+}
+
+model Category {
+  id          Int    @id @default(autoincrement())
+  name String @unique
+
+  item Item[]
+
+  @@map("categories")
 }
 
 model Inventory {

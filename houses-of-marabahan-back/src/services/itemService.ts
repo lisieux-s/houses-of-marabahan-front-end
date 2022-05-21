@@ -3,6 +3,26 @@ import * as itemRepository from '../repositories/itemRepository.js';
 
 export type CreateItemData = Omit<Item, 'id'>;
 
+export async function create(createItemData: CreateItemData) {
+  return await itemRepository.create(createItemData);
+}
+
+export async function update(
+  id: number,
+  name?: string,
+  categoryId?: number,
+  description?: string,
+) {
+  await itemRepository.findById(id);
+  if (name) await itemRepository.updateName(id, name);
+  if(categoryId) await itemRepository.updateCategoryId(id, categoryId)
+  if (description) await itemRepository.updateDescription(id, description);
+}
+
+export async function findMany() {
+  return await itemRepository.findMany();
+}
+
 export async function findByName(name: string) {
   const item = await itemRepository.findByName(name);
   if (!item) throw { type: 'NOT_FOUND', message: 'Item not found' };

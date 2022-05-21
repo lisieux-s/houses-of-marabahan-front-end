@@ -12,7 +12,6 @@ export async function createCharacter(req: Request, res: Response) {
   const { id } = req.params
   const houseId = parseInt(id)
 
-  console.log(houseId)
   await characterService.create({
       name,
       kindId: kindIdInt,

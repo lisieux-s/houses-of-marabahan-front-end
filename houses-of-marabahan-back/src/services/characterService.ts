@@ -47,6 +47,5 @@ export async function getActiveCharacter(houseId: number) {
       type: 'NOT_FOUND',
       message: 'No active character found for this house',
     };
-    console.log(character)
   return character;
 }

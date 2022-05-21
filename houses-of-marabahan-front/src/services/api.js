@@ -28,6 +28,14 @@ async function getKinds() {
     return await baseAPI.get('/kinds');
 }
 
+async function createItem(data) {
+    await await baseAPI.post('/items/create', data)
+}
+
+async function getAllItems() {
+    return await baseAPI.get('/items');
+}
+
 async function getItemByName(name) {
     return await baseAPI.get(`/item/${name}`);
 }
@@ -46,19 +54,28 @@ async function getActiveCharacter(id, token) {
     return await baseAPI.get(`/house/${id}/get/active-character`, token);
 }
 
-async function getAllItems() {
-    return await baseAPI.get('/items');
+async function getAllCategories() {
+    return await baseAPI.get('/categories')
 }
+
+async function createCategory(data) {
+    await baseAPI.post('/categories/create', data)
+} 
+
+
 
 const api = {
     findHouseByName,
     signUp,
     signIn,
     getKinds,
+    createItem,
+    getAllItems,
     getItemByName,
     getItemById,
     createCharacter,
     getActiveCharacter,
-    getAllItems
+    getAllCategories,
+    createCategory
 }
 export default api;

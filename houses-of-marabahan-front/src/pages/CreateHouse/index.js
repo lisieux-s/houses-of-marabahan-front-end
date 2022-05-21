@@ -165,7 +165,7 @@ export default function CreateHouse() {
             htmlFor='knitting-kit'
             selected={formData.starterItem === 'knitting kit'}
           >
-            <img src={knittingKitImageUrl} alt='sword' />
+            <img src={knittingKitImageUrl} alt='knitting kit' />
             <p>knitting kit</p>
           </Square>
           <input
