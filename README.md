@@ -1,8 +1,11 @@
 # About Houses of Marabahan
 A modern take on 2000s browser-based virtual worlds.
 
-## Features in development
+## Features
 - Found your house and create multiple characters 
+
+## Features in development
+
 - Send messages and gifts to your friends
 - Trade with other players
 - Spend your hard-earned money on a meal at Mikaila's (and listen to her advice, free of charge)
