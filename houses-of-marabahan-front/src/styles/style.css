@@ -1,8 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Langar&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=BIZ+UDGothic:wght@400;700&display=swap');
-
 @import url('https://fonts.googleapis.com/css2?family=Eczar:wght@400;500;800&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300;400;500;600;700&display=swap');
 * {
   box-sizing: border-box;
   transition: all 0.2s;
@@ -24,8 +23,9 @@ body {
   padding: 8px;
   background: #fff;
   /* font-family: 'Langar', cursive; */
-  font-family: 'BIZ UDGothic', sans-serif;
+  /* font-family: 'BIZ UDGothic', sans-serif; */
   /* font-family: 'Eczar', serif; */
+  font-family: 'Signika Negative', sans-serif;
   background: url('../assets/bg\ sketch.png');
   background-size: cover;
   background-repeat: no-repeat;

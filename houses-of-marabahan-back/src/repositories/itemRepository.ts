@@ -31,6 +31,10 @@ export async function updateDescription(id: number, description: string) {
   });
 }
 
+export async function findMany() {
+  return await prisma.item.findMany();
+}
+
 export async function findByName(name: string) {
   return await prisma.item.findUnique({
     where: { name },

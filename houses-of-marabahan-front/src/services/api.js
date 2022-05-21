@@ -46,6 +46,10 @@ async function getActiveCharacter(id, token) {
     return await baseAPI.get(`/house/${id}/get/active-character`, token);
 }
 
+async function getAllItems() {
+    return await baseAPI.get('/items');
+}
+
 const api = {
     findHouseByName,
     signUp,
@@ -54,6 +58,7 @@ const api = {
     getItemByName,
     getItemById,
     createCharacter,
-    getActiveCharacter
+    getActiveCharacter,
+    getAllItems
 }
 export default api;

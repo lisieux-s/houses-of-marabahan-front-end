@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import CreateCharacter from './pages/CreateCharacter';
+import HousesOfMarabahan from './pages/HousesOfMarabahan';
 import CreateHouse from './pages/CreateHouse';
+import CreateCharacter from './pages/CreateCharacter';
 import Home from './pages/Home';
 import DrivenPlus from './pages/Driven+';
 
@@ -26,8 +27,9 @@ export default function App() {
           <NavBar />
           <LeftBar />
           <Routes>
-            <Route path='/create/character' element={<CreateCharacter />} />
+            <Route path='/' element={<HousesOfMarabahan />} />
             <Route path='/create/house' element={<CreateHouse />} />
+            <Route path='/create/character' element={<CreateCharacter />} />
             <Route path='/home' element={<Home />} />
             <Route path='/Driven+' element={<DrivenPlus />} />
             <Route path='/items' element={<Items />} />

@@ -23,3 +23,8 @@ export async function editItem(req: Request, res: Response) {
   );
   res.sendStatus(200)
 }
+
+export async function getAllItems(req: Request, res: Response) {
+  const items = await creatorService.findAllItems();
+  res.send(items)
+}

@@ -17,3 +17,7 @@ export async function update(
   if (spriteUrl) await itemRepository.updateSpriteUrl(id, spriteUrl);
   if (description) await itemRepository.updateDescription(id, description);
 }
+
+export async function findAllItems() {
+  return await itemRepository.findMany();
+}

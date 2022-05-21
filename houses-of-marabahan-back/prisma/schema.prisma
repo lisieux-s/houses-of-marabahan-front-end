@@ -41,7 +41,7 @@ model Character {
 model Kind {
   id        Int    @id @default(autoincrement())
   name      String @unique
-  spriteUrl String
+  spritePath String
   description String
 
   character Character[]
@@ -51,7 +51,7 @@ model Kind {
 model Item {
   id          Int    @id @default(autoincrement())
   name        String @unique
-  spriteUrl   String
+  spritePath   String
   description String
 
   inventoryItem InventoryItem[]

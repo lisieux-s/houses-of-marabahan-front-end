@@ -11,8 +11,7 @@ import { supabase } from '../../services/supabaseClient';
 
 export default function CharacterCard() {
   const { token } = useAuth();
-  const { activeCharacterName } = useCharacter()
-  console.log(activeCharacterName)
+  const { activeCharacterName } = useCharacter();
 
   let houseId = '';
   if (localStorage.getItem('marabahani-house-id')?.length > 1) {
@@ -23,30 +22,31 @@ export default function CharacterCard() {
   const [characterImage, setCharacterImage] = useState(null);
 
   useEffect(() => {
-    async function getCharacterData() {
-      const { data } = await api.getActiveCharacter(houseId, token);
-      setCharacter(data);
-      
-    }
     getCharacterData();
   }, [houseId, token, activeCharacterName]);
 
   useEffect(() => {
-    async function downloadImage(path) {
-      //for now, character image is just the kind sprite
-      try {
-        const { data, error } = await supabase.storage
-          .from('public/marabahani/kinds')
-          .download(`${path}.png`);
-        if (error) throw error;
-        const url = URL.createObjectURL(data);
-        setCharacterImage(url);
-      } catch (error) {
-        console.log(`Couldn't load image: ${error.message}`);
-      }
-    }
     downloadImage(kindIdToKindName(character?.kindId));
   }, [character]);
+
+  async function getCharacterData() {
+    const { data } = await api.getActiveCharacter(houseId, token);
+    setCharacter(data);
+  }
+
+  async function downloadImage(path) {
+    //for now, character image is just the kind sprite
+    try {
+      const { data, error } = await supabase.storage
+        .from('public/marabahani/kinds')
+        .download(`${path}.png`);
+      if (error) throw error;
+      const url = URL.createObjectURL(data);
+      setCharacterImage(url);
+    } catch (error) {
+      console.log(`Couldn't load image: ${error.message}`);
+    }
+  }
 
   function kindIdToKindName(id) {
     switch (id) {
