@@ -92,7 +92,6 @@ export default function CreateCharacter() {
         setModalIsOpen={setModalIsOpen}
       />
     );
-
   return (
     <main>
       <form onSubmit={(e) => handleSubmit(e)}>

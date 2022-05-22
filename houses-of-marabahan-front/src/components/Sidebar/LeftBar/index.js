@@ -10,7 +10,8 @@ export default function LeftBar() {
 
   const { token } = useAuth();
 
-  if (path === '/items' || path === '/kinds') return '';
+  if (path === '/items' || path === '/kinds' || path === '/create/character')
+    return '';
   if (!token) return '';
   return (
     <Sidebar left={true}>
