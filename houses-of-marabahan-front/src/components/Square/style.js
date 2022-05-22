@@ -32,6 +32,7 @@ export const Square = styled.label`
     z-index: 300;
 
     text-shadow: 0px 0px 4px white;
+    line-height: 1;
 
     text-align: center;
     opacity: 0;
