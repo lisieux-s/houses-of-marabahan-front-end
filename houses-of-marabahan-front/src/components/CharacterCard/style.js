@@ -7,7 +7,6 @@ export const Card = styled.div`
     align-items: center;
 
     width: 75%;
-    height: 300px;
     background: white;
 
     padding: 8px;

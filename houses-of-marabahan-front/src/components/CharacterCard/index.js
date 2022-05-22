@@ -34,12 +34,14 @@ export default function CharacterCard() {
   async function downloadImage(path) {
     //for now, character image is just the kind sprite
     try {
-      const { data, error } = await supabase.storage
-        .from('public/marabahani/kinds')
-        .download(`${path}.png`);
-      if (error) throw error;
-      const url = URL.createObjectURL(data);
-      setCharacterImage(url);
+      if (character) {
+        const { data, error } = await supabase.storage
+          .from('public/marabahani/kinds')
+          .download(`${path}.png`);
+        if (error) throw error;
+        const url = URL.createObjectURL(data);
+        setCharacterImage(url);
+      }
     } catch (error) {
       console.log(`Couldn't load image: ${error.message}`);
     }

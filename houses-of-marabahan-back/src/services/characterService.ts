@@ -33,6 +33,15 @@ export async function findById(id: number) {
   return character;
 }
 
+export async function findByHouse(houseId: number) {
+  const house = await houseService.findById(houseId);
+  if(!house) throw {
+    type: 'NOT_FOUND',
+    message: 'No such house'
+  }
+  return await characterRepository.findCharacterByHouse(houseId)
+}
+
 export async function setAsActive(houseId: number, characterId: number) {
   await houseService.findById(houseId);
   await findById(characterId);

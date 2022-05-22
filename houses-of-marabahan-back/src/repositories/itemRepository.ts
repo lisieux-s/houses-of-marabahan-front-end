@@ -34,11 +34,9 @@ export async function updateCategoryId(id: number, categoryId: number) {
 }
 
 export async function findMany() {
-  return await prisma.item.findMany(
-    {
-      include: { category: { select: { name: true } } }
-    }
-  );
+  return await prisma.item.findMany({
+    include: { category: { select: { name: true } } },
+  });
 }
 
 export async function findByName(name: string) {

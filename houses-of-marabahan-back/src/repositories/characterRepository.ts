@@ -19,13 +19,22 @@ export async function findCharacterByName(characterData: CharacterData) {
 
 export async function findCharacterById(id: number) {
   return await prisma.character.findUnique({
-    where: { id }
+    where: { id },
+  });
+}
+
+export async function findCharacterByHouse(houseId: number) {
+  return await prisma.character.findMany({
+    where: { houseId },
+    include: {
+      kind: {
+        select: { name: true }
+      }
+    }
   })
 }
 
-export async function removeActiveCharacter(
-  houseId: number,
-) {
+export async function removeActiveCharacter(houseId: number) {
   await prisma.character.updateMany({
     where: {
       houseId,
@@ -37,15 +46,15 @@ export async function removeActiveCharacter(
 export async function addActiveCharacter(id: number) {
   await prisma.character.update({
     where: { id },
-    data: { active: true }
-  })
-} 
+    data: { active: true },
+  });
+}
 
 export async function getActiveCharacter(houseId: number) {
   return await prisma.character.findFirst({
     where: {
       houseId,
-      active: true
-    }
-  })
+      active: true,
+    },
+  });
 }

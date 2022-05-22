@@ -33,7 +33,7 @@ async function createItem(data) {
 }
 
 async function editItem(data, id) {
-    await baseAPI.put(`/item/id/${id}/edit`, data)
+    await baseAPI.put(`/item/${id}/edit`, data)
 }
 
 async function getAllItems() {
@@ -45,7 +45,7 @@ async function getItemByName(name) {
 }
 
 async function getItemById(id) {
-    return await baseAPI.get(`/item/id/${id}`)
+    return await baseAPI.get(`/item/${id}`)
 }
 
 async function createCharacter(data, id, token) {
@@ -56,6 +56,11 @@ async function createCharacter(data, id, token) {
 async function getActiveCharacter(id, token) {
     getConfig(token);
     return await baseAPI.get(`/house/${id}/get/active-character`, token);
+}
+
+async function findCharactersByHouse(id) {
+    console.log(id)
+    return await baseAPI.get(`house/${id}/characters`)
 }
 
 async function getAllCategories() {
@@ -80,6 +85,7 @@ const api = {
     getItemById,
     createCharacter,
     getActiveCharacter,
+    findCharactersByHouse,
     getAllCategories,
     createCategory
 }

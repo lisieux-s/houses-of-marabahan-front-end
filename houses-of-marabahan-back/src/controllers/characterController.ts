@@ -40,3 +40,10 @@ export async function findActiveCharacter(req: Request, res: Response) {
   const character = await characterService.getActiveCharacter(houseIdNumber)
   res.send(character);
 }
+
+export async function findCharacterByHouse(req: Request, res: Response) {
+  const id = req.params.id;
+  const idNumber = parseInt(id)
+  const characters = await characterService.findByHouse(idNumber);
+  res.send(characters)
+}
