@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 
+import AddIcon from '@mui/icons-material/Add';
+
 import { Selection } from '../../../components/Selection/style';
 import { Square } from '../../../components/Square/style';
 import AddItem from './AddItem';
@@ -13,10 +15,15 @@ export default function Items() {
   const [editModalIsOpen, setEditModalIsOpen] = useState(false);
 
   const [categories, setCategories] = useState(null);
+
   const [items, setItems] = useState(null);
   const itemBlobsHashtable = {};
   const [itemBlobs, setItemBlobs] = useState({});
 
+  const [selectedItem, setSelectedItem, getSelectedItem] = useState(null)
+
+
+  //add useEffect for rendering updated item data
   useEffect(() => {
     async function getAllItems() {
       const { data } = await api.getAllItems();
@@ -30,7 +37,6 @@ export default function Items() {
     getAllCategories();
   }, []);
 
-
   useEffect(() => {
     async function downloadImage(name, category) {
       try {
@@ -42,7 +48,6 @@ export default function Items() {
       } catch (error) {
         console.log(error);
       }
-
     }
 
     async function populateKindBlobs() {
@@ -52,16 +57,25 @@ export default function Items() {
           await downloadImage(item.name, item.category.name);
         }
       }
-      setItemBlobs(itemBlobsHashtable)
+      setItemBlobs(itemBlobsHashtable);
     }
     populateKindBlobs();
   }, [items]);
+
+  async function handleClick(item) {
+    setSelectedItem(item);
+  }
+
+  useEffect(() => {
+    console.log(selectedItem)
+    setEditModalIsOpen(true)
+  }, [selectedItem])
 
   return (
     <main>
       <h3>
         Add a new item{' '}
-        <button onClick={() => setAddModalIsOpen(true)}>+</button>
+        <AddIcon onClick={() => setAddModalIsOpen(true)} />
       </h3>
       <AddItem
         modalIsOpen={addModalIsOpen}
@@ -72,7 +86,7 @@ export default function Items() {
       {items ? (
         <Selection>
           {items.map((item) => (
-            <Square key={item.id}>
+            <Square key={item.id} onClick={() => handleClick(item)}>
               <p>{item.name}</p>
               <img src={itemBlobs[item.name]} alt={item.name} />
             </Square>
@@ -81,7 +95,14 @@ export default function Items() {
       ) : (
         'Loading items...'
       )}
-      <EditItem modalIsOpen={editModalIsOpen} />
+      <EditItem
+        modalIsOpen={editModalIsOpen}
+        setModalIsOpen={setEditModalIsOpen}
+        categories={categories}
+        item={selectedItem}
+        setItem={setSelectedItem}
+        itemBlobs={itemBlobs}
+      />
     </main>
   );
 }

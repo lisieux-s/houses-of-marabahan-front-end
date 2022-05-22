@@ -29,7 +29,11 @@ async function getKinds() {
 }
 
 async function createItem(data) {
-    await await baseAPI.post('/items/create', data)
+    await baseAPI.post('/items/create', data)
+}
+
+async function editItem(data, id) {
+    await baseAPI.put(`/item/id/${id}/edit`, data)
 }
 
 async function getAllItems() {
@@ -70,6 +74,7 @@ const api = {
     signIn,
     getKinds,
     createItem,
+    editItem,
     getAllItems,
     getItemByName,
     getItemById,

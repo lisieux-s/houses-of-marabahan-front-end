@@ -74,6 +74,10 @@ form > div {
   gap: 8px;
 }
 
+.success {
+  color: teal;
+}
+
 .outline {
   border: 1px solid black;
   padding: 8px;
@@ -123,6 +127,8 @@ button:hover {
 }
 
 h3 {
+  display: flex;
+  align-items: center;
   margin-top: 64px;
 }
 
