@@ -11,4 +11,9 @@ export const Selection = styled.div`
   div {
     display: flex;
   }
+
+  margin-bottom: 64px;
+  :last-of-type {
+    margin-bottom: 0;
+  }
 `;

@@ -17,10 +17,10 @@ export default function Storage() {
 
   useEffect(() => {
     async function getStorage(id) {
-        const { data } = await api.getStorage(id);
-        setStorageItems(data)
+      const { data } = await api.getStorage(id);
+      setStorageItems(data);
     }
-    getStorage(houseId)
+    getStorage(houseId);
   }, []);
 
   useEffect(() => {
@@ -31,15 +31,17 @@ export default function Storage() {
           .download(`${name}.png`);
         const url = URL.createObjectURL(data);
         itemBlobsHashtable[name] = url;
-      } catch (error) {
-      }
+      } catch (error) {}
     }
 
     async function populateItemBlobs() {
       if (!storageItems) return;
       for (let storageItem of storageItems) {
         if (!itemBlobsHashtable[storageItem.item.name]) {
-          await downloadImage(storageItem.item.name, storageItem.item.category.name);
+          await downloadImage(
+            storageItem.item.name,
+            storageItem.item.category.name
+          );
         }
       }
       setItemBlobs(itemBlobsHashtable);
@@ -48,16 +50,21 @@ export default function Storage() {
   }, [storageItems]);
 
   if (!storageItems) return 'Loading items...';
-  return(
-      <Selection>
-          {storageItems.map((storageItem) => (
-              
-              <Square key={storageItem.id}>
-                  {console.log(storageItem.item.name)}
-                  <img src={itemBlobs[storageItem.item.name]} alt={storageItem.item.name} />
-                  <p>{storageItem.item.name}</p>
-              </Square>
-          ))}
+  return (
+    <>
+      <h2>Storage</h2>
+      <Selection className='outline'>
+        {storageItems.map((storageItem) => (
+          <Square key={storageItem.id}>
+            {console.log(storageItem.item.name)}
+            <img
+              src={itemBlobs[storageItem.item.name]}
+              alt={storageItem.item.name}
+            />
+            <p>{storageItem.item.name}</p>
+          </Square>
+        ))}
       </Selection>
-  )
+    </>
+  );
 }

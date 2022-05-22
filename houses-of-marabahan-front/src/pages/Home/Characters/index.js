@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 
+import AddIcon from '@mui/icons-material/Add';
+
 import { List } from '../../../components/List/style';
+import { StyledLink } from '../../../components/StyledLink/style';
 import { CharacterPortrait } from '../../../components/CharacterPortrait/style';
 
 import useHouse from '../../../hooks/useHouse';
@@ -53,7 +56,15 @@ export default function Characters() {
   if (!characters) return '';
   return (
     <>
-      <h3>Members</h3>
+      <div className='justify-content-space-between'>
+      <h2>
+        Members{' '}
+        
+      </h2>
+      <StyledLink to='/create/character'>
+          <AddIcon />
+        </StyledLink>
+      </div>
       {characters ? (
         <List>
           {characters.map((character) => (
