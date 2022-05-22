@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { Selection } from '../../../components/Selection/style';
+import { List } from '../../../components/List/style';
 import { CharacterPortrait } from '../../../components/CharacterPortrait/style';
 
 import useHouse from '../../../hooks/useHouse';
@@ -55,14 +55,18 @@ export default function Characters() {
     <>
       <h3>Members</h3>
       {characters ? (
-        <Selection>
+        <List>
           {characters.map((character) => (
-            <CharacterPortrait
-              key={character.id}
-              image={characterBlobs[character.name]}
-            />
+            <div key={character.id} className='outline'>
+              <CharacterPortrait image={characterBlobs[character.name]} />
+              <div>
+                <h2>{character.name}</h2>
+                <p>Seeks {character.seeks}</p>
+                <p>Fears {character.fears}</p>
+              </div>
+            </div>
           ))}
-        </Selection>
+        </List>
       ) : (
         'Loading characters...'
       )}

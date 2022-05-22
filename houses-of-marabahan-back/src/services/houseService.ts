@@ -56,3 +56,8 @@ async function getHouseOrFail(signInData: HouseData) {
     throw { type: 'UNAUTHORIZED', message: 'Incorrect password' };
   return house;
 }
+
+export async function getStorage(houseId: number) {
+  await findById(houseId)
+  return await houseRepository.getStorage(houseId)
+}

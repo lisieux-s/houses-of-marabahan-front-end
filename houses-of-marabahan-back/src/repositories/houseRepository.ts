@@ -19,3 +19,15 @@ export async function findById(id: number) {
         where: { id }
     })
 }
+
+export async function getStorage(houseId: number) {
+    return prisma.houseItem.findMany({
+        where: { houseId },
+        include: { item: {
+            select: {
+                category: true,
+                name: true
+            }
+        } }
+    })
+}

@@ -20,9 +20,17 @@ export async function signIn(req: Request, res: Response) {
 export async function checkNameAvailability(req: Request, res: Response) {
   const { name } = req.params;
   const result = await houseService.findByName(name);
-  if (result) return res.send({
-    id: result.id,
-    name: result.name
-  });
+  if (result)
+    return res.send({
+      id: result.id,
+      name: result.name,
+    });
   res.send(false);
+}
+
+export async function getStorage(req: Request, res: Response) {
+  const id = req.params.id;
+  const idNumber = parseInt(id);
+  const storageItems = await houseService.getStorage(idNumber);
+  res.send(storageItems);
 }
