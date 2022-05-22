@@ -68,7 +68,7 @@ export default function Characters() {
       {characters ? (
         <List>
           {characters.map((character) => (
-            <div key={character.id} className='outline'>
+            <div key={character.id} className='box-shadow'>
               <CharacterPortrait image={characterBlobs[character.name]} />
               <div>
                 <h2>{character.name}</h2>

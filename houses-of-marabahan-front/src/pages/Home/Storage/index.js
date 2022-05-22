@@ -53,7 +53,7 @@ export default function Storage() {
   return (
     <>
       <h2>Storage</h2>
-      <Selection className='outline'>
+      <Selection className='box-shadow'>
         {storageItems.map((storageItem) => (
           <Square key={storageItem.id}>
             {console.log(storageItem.item.name)}

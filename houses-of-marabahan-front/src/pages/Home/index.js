@@ -7,8 +7,8 @@ import Characters from './Characters';
 export default function Home() {
   return (
     <main>
-      <Storage />
-      <Characters />
+      <Storage/>
+      <Characters/>
     </main>
   );
 }
