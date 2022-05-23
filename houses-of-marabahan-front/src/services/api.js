@@ -63,7 +63,6 @@ async function getActiveCharacter(id, token) {
 }
 
 async function findCharactersByHouse(id) {
-  console.log(id);
   return await baseAPI.get(`house/${id}/characters`);
 }
 

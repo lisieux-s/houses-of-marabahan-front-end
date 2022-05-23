@@ -15,7 +15,6 @@ import { supabase } from '../../../services/supabaseClient';
 
 export default function Characters() {
   const { houseId } = useHouse();
-  console.log(houseId);
 
   const [characters, setCharacters] = useState('');
   const characterBlobsHashtable = {};

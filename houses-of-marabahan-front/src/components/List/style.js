@@ -19,4 +19,9 @@ export const List = styled.div`
             flex-direction: column;
         }
     }
+
+    img {
+        width: 50%;
+        object-fit: cover;
+    }
 `

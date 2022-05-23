@@ -11,7 +11,7 @@ export function CharacterProvider({ children }) {
     const [activeCharacterName, setActiveCharacterName] = useState(localActiveCharacterName)
 
     function storeActiveCharacterData(data) {
-        setActiveCharacterName(data.id)
+        setActiveCharacterName(data.name)
 
         localStorage.setItem(ACTIVE_CHARACTER_NAME_KEY, JSON.stringify(data.name))
 

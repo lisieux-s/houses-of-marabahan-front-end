@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -16,6 +16,7 @@ export default function AddItem({ modalIsOpen, setModalIsOpen, categories }) {
     sprite: '',
   });
 
+
   function handleChange({ target }) {
     setFormData({ ...formData, [target.name]: target.value });
   }
@@ -31,6 +32,13 @@ export default function AddItem({ modalIsOpen, setModalIsOpen, categories }) {
       if (formData.sprite) {
         await uploadImage();
       }
+      setFormData({
+        name: '',
+        categoryId: '',
+        description: '',
+        sprite: '',
+      });
+      setModalIsOpen(false)
     } catch (error) {
       alert('Please try again in a moment');
       console.log(error);

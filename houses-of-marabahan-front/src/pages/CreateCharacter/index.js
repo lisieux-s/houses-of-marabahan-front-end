@@ -7,10 +7,11 @@ import { CharacterPortrait } from '../../components/CharacterPortrait/style';
 import useAuth from '../../hooks/useAuth';
 import useHouse from '../../hooks/useHouse';
 import useCharacter from '../../hooks/useCharacter';
+import useInteract from '../../hooks/useInteract'
 
 import api from '../../services/api';
-
 import { supabase } from '../../services/supabaseClient';
+
 import SignIn from '../../components/SignIn';
 
 export default function CreateCharacter() {
@@ -19,13 +20,14 @@ export default function CreateCharacter() {
   const { token } = useAuth();
   const { houseId } = useHouse();
   const { storeActiveCharacterData } = useCharacter();
+  const { select } = useInteract();
 
   let houseName = '';
   if (localStorage.getItem('marabahani-house-name')?.length > 1) {
     houseName = JSON.parse(localStorage.getItem('marabahani-house-name'));
   }
 
-  const hashtable = {};
+  const kindBlobsHashtable = {};
 
   const [kinds, setKinds] = useState([]);
   const [kindBlobs, setKindBlobs] = useState({});
@@ -54,16 +56,16 @@ export default function CreateCharacter() {
         .from('/public/marabahani/kinds')
         .download(`${name}.png`);
       const url = URL.createObjectURL(data);
-      hashtable[name] = url;
+      kindBlobsHashtable[name] = url;
     }
 
     async function populateKindBlobs() {
       for (let kind of kinds) {
-        if (!hashtable[kind.name]) {
+        if (!kindBlobsHashtable[kind.name]) {
           await downloadImage(kind.name);
         }
       }
-      setKindBlobs(hashtable);
+      setKindBlobs(kindBlobsHashtable);
     }
     populateKindBlobs();
   }, [kinds]);
@@ -75,6 +77,10 @@ export default function CreateCharacter() {
 
   function handleChange({ target }) {
     setFormData({ ...formData, [target.name]: target.value });
+  }
+
+  function handleClick(kind) {
+    select(kind);
   }
 
   async function handleSubmit(e) {
@@ -112,6 +118,7 @@ export default function CreateCharacter() {
                 type='radio'
                 value={kind.id}
                 name='kindId'
+                onClick={() => handleClick(kind)}
                 onChange={(e) => handleChange(e)}
               />
             </div>

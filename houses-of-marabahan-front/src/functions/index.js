@@ -9,6 +9,7 @@ export async function downloadItemImage(category, name) {
       throw error;
     }
     const url = URL.createObjectURL(data);
+    console.log(url)
     return url;
   } catch (error) {
     console.log(error);

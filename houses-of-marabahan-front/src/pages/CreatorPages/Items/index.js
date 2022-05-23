@@ -20,7 +20,7 @@ export default function Items() {
   const itemBlobsHashtable = {};
   const [itemBlobs, setItemBlobs] = useState({});
 
-  const [selectedItem, setSelectedItem, getSelectedItem] = useState(null)
+  const [selectedItem, setSelectedItem] = useState(null)
 
 
   //add useEffect for rendering updated item data
@@ -35,7 +35,7 @@ export default function Items() {
     }
     getAllItems();
     getAllCategories();
-  }, []);
+  }, [addModalIsOpen, editModalIsOpen]);
 
   useEffect(() => {
     async function downloadImage(name, category) {
