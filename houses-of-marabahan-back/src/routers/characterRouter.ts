@@ -8,4 +8,6 @@ characterRouter.get('/house/:id/get/active-character', characterController.findA
 characterRouter.put('/house/:id/set/active-character', characterController.setAsActive)
 characterRouter.get('/house/:id/characters', characterController.findCharacterByHouse);
 
+characterRouter.get('/character/:id/get/inventory', characterController.getInventory)
+
 export default characterRouter;

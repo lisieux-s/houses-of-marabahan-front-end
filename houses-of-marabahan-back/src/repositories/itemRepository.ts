@@ -62,6 +62,29 @@ export async function addToStorage(itemId: number, houseId: number) {
   });
 }
 
-export async function moveToStorage() {}
-export async function addToInventory() {}
-export async function moveToInventory() {}
+export async function findInStorage(itemId: number, houseId: number) {
+  return await prisma.houseItem.findFirst({
+    where: {
+      itemId,
+      houseId,
+          }
+  })
+}
+
+export async function removeFromStorage(itemId: number, houseId: number) {
+  const houseItem = await findInStorage(itemId, houseId)
+  await prisma.houseItem.delete({
+    where: {
+      id: houseItem.id
+    }
+  })
+}
+
+export async function addToInventory(itemId: number, characterId: number) {
+  await prisma.characterItem.create({
+    data: {
+      itemId,
+      characterId
+    }
+  })
+}

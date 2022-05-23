@@ -12,7 +12,7 @@ import { supabase } from '../../services/supabaseClient';
 
 export default function CharacterCard() {
   const { token } = useAuth();
-  const { activeCharacterName } = useCharacter();
+  const { activeCharacter, storeActiveCharacterData } = useCharacter();
   const { houseId } = useHouse();
 
   const [character, setCharacter] = useState(null);
@@ -20,7 +20,7 @@ export default function CharacterCard() {
 
   useEffect(() => {
     getCharacterData();
-  }, [houseId, token, activeCharacterName]);
+  }, [houseId, token]);
 
   useEffect(() => {
     downloadImage(kindIdToKindName(character?.kindId));
@@ -29,6 +29,7 @@ export default function CharacterCard() {
   async function getCharacterData() {
     const { data } = await api.getActiveCharacter(houseId, token);
     setCharacter(data);
+    storeActiveCharacterData(data)
   }
 
   async function downloadImage(path) {

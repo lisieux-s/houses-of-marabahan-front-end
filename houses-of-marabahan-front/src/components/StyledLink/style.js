@@ -6,6 +6,7 @@ export const StyledLink = styled(Link)`
   align-items: center;
   justify-content: center;
   
+  font-weight: 700;
   text-decoration: none;
   color: inherit;
   :visited {

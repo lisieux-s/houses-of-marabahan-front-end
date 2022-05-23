@@ -58,3 +58,8 @@ export async function getActiveCharacter(houseId: number) {
     };
   return character;
 }
+
+export async function getInventory(characterId: number) {
+  await findById(characterId);
+  return await characterRepository.getInventory(characterId);
+}

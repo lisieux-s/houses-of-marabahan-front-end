@@ -5,17 +5,25 @@ import { Sidebar } from '../style';
 import InformationBox from '../../InformationBox';
 
 import useAuth from '../../../hooks/useInteract';
-import useCharacter from '../../../hooks/useCharacter'
+import useHouse from '../../../hooks/useHouse';
+import useCharacter from '../../../hooks/useCharacter';
 import useInteract from '../../../hooks/useInteract';
 
 import api from '../../../services/api';
 
 export default function RightBar() {
-    const { token } = useAuth();
-    const { storeActiveCharacterData } = useCharacter();
+  const { token } = useAuth();
+
+  const { houseId } = useHouse();
+
+  const { activeCharacter } = useCharacter();
+  const { storeActiveCharacterData } = useCharacter();
+  console.log(activeCharacter)
 
   const { info } = useInteract();
   const { message } = useInteract();
+
+  const { disableActions } = useInteract();
   const { storageActions } = useInteract();
   const { characterActions } = useInteract();
 
@@ -33,12 +41,21 @@ export default function RightBar() {
 
   useEffect(() => {
     setDisplayInfo('');
+    disableActions();
   }, [path]);
 
   async function setAsActive() {
-    console.log(info);
-    await api.setActiveCharacter(info.houseId, info.id, token)
-    storeActiveCharacterData(info)
+    await api.setActiveCharacter(info.houseId, info.id, token);
+    storeActiveCharacterData(info);
+  }
+
+  async function moveToInventory(itemId, houseId, activeCharacterId) {
+    const body = {
+      itemId,
+      houseId: parseInt(houseId),
+      characterId: activeCharacterId,
+    };
+    await api.moveToInventory(body);
   }
 
   return (
@@ -47,8 +64,22 @@ export default function RightBar() {
         <InformationBox>
           <h2>{displayInfo.name}</h2>
           <p>{displayInfo.description}</p>
-          {storageActions ? <button>Move to inventory</button> : ''}
-          {characterActions ? <button onClick={() => setAsActive()}>Set as active</button> : ''}
+          {storageActions ? (
+            <button
+              onClick={() =>
+                moveToInventory(info.id, houseId, activeCharacter.id)
+              }
+            >
+              Move to inventory
+            </button>
+          ) : (
+            ''
+          )}
+          {characterActions ? (
+            <button onClick={() => setAsActive()}>Set as active</button>
+          ) : (
+            ''
+          )}
         </InformationBox>
       ) : (
         ''

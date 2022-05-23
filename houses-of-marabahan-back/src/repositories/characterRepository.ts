@@ -58,3 +58,11 @@ export async function getActiveCharacter(houseId: number) {
     },
   });
 }
+
+export async function getInventory(characterId: number) {
+  return await prisma.characterItem.findMany({
+    where: {
+      characterId
+    }
+  })
+}

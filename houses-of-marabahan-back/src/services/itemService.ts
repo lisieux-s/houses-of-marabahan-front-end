@@ -34,6 +34,15 @@ export async function findById(id: number) {
   if (!item) throw { type: 'NOT_FOUND', message: 'Item not found' };
   return item;
 }
+
 export async function addToStorage(itemId: number, houseId: number) {
   await itemRepository.addToStorage(itemId, houseId);
+}
+
+export async function moveToInventory(itemId: number, houseId: number, characterId: number) {
+  if(!await itemRepository.findInStorage(itemId, houseId)) {
+    throw { type: 'NOT_FOUND', message: 'This item is not in this storage'}
+  }
+  await itemRepository.removeFromStorage(itemId, houseId);
+  await itemRepository.addToInventory(itemId, characterId);
 }

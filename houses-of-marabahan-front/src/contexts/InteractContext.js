@@ -29,9 +29,23 @@ export function InteractProvider({ children }) {
     }
   }
 
+  function disableActions() {
+    setStorageActions(false);
+    setCharacterActions(false);
+  }
+
   return (
     <InteractContext.Provider
-      value={{ select, info, alert, message, enableActions, storageActions, characterActions }}
+      value={{
+        select,
+        info,
+        alert,
+        message,
+        enableActions,
+        disableActions,
+        storageActions,
+        characterActions,
+      }}
     >
       {children}
     </InteractContext.Provider>

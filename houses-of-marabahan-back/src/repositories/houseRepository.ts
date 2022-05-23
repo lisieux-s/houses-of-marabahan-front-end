@@ -25,6 +25,7 @@ export async function getStorage(houseId: number) {
         where: { houseId },
         include: { item: {
             select: {
+                id: true,
                 category: true,
                 name: true,
                 description: true

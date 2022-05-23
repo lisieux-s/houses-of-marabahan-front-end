@@ -52,6 +52,14 @@ async function getItemById(id) {
   return await baseAPI.get(`/item/${id}`);
 }
 
+async function moveToInventory(body) {
+  console.log(body)
+  await baseAPI.post('/move-to-inventory', body);
+}
+async function getInventory(characterId) {
+  await baseAPI.get(`/character/${characterId}/get/inventory`)
+}
+
 async function createCharacter(data, id, token) {
   getConfig(token);
   await baseAPI.post(`/house/${id}/create/character`, data, token);
@@ -63,7 +71,6 @@ async function getActiveCharacter(id, token) {
 }
 
 async function setActiveCharacter(houseId, characterId, token) {
-  console.log(characterId)
   getConfig(token);
   return await baseAPI.put(`/house/${houseId}/set/active-character`, { characterId }, token)
 }
@@ -91,6 +98,8 @@ const api = {
   getAllItems,
   getItemByName,
   getItemById,
+  moveToInventory,
+  getInventory,
   createCharacter,
   getActiveCharacter,
   setActiveCharacter,

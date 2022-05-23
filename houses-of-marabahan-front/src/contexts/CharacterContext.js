@@ -3,28 +3,29 @@ import { useState, createContext } from 'react';
 export const CharacterContext = createContext(null)
 
 
-const ACTIVE_CHARACTER_NAME_KEY = 'marabahani-active-character'
+// const ACTIVE_CHARACTER_NAME_KEY = 'marabahani-active-character'
 
-const localActiveCharacterName = localStorage.getItem(ACTIVE_CHARACTER_NAME_KEY)
+// const localActiveCharacterName = localStorage.getItem(ACTIVE_CHARACTER_NAME_KEY)
 
 export function CharacterProvider({ children }) {
-    const [activeCharacterName, setActiveCharacterName] = useState(localActiveCharacterName)
+    const [activeCharacterName, setActiveCharacterName] = useState(null)
+    const [activeCharacterId, setActiveCharacterId] = useState(null)
+    const [activeCharacter, setActiveCharacter] = useState(null)
 
     function storeActiveCharacterData(data) {
-        setActiveCharacterName(data.name)
-
-        localStorage.setItem(ACTIVE_CHARACTER_NAME_KEY, JSON.stringify(data.name))
-
+        setActiveCharacter(data)
+        setActiveCharacterName(data.name);
+        setActiveCharacterId(data.id)
     }
 
     function removeActiveCharacterData() {
         setActiveCharacterName(null)
-        localStorage.removeItem(ACTIVE_CHARACTER_NAME_KEY)
+        setActiveCharacterId(null)
     }
 
  
     return(
-        <CharacterContext.Provider value={{ activeCharacterName, storeActiveCharacterData, removeActiveCharacterData }}>
+        <CharacterContext.Provider value={{ activeCharacter, activeCharacterName, activeCharacterId, storeActiveCharacterData, removeActiveCharacterData }}>
             {children}
         </CharacterContext.Provider>
     )

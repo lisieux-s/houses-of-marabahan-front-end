@@ -48,3 +48,10 @@ export async function findCharacterByHouse(req: Request, res: Response) {
   const characters = await characterService.findByHouse(idNumber);
   res.send(characters)
 }
+
+export async function getInventory(req: Request, res: Response) {
+  const { id } = req.params
+  const idNumber = parseInt(id)
+  const inventory = await characterService.getInventory(idNumber);
+  res.send(inventory);
+}

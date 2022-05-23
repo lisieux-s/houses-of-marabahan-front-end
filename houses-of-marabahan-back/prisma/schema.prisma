@@ -33,7 +33,7 @@ model Character {
   fears   String
   active Boolean @default(true)
 
-  inventory Inventory[]
+  characterItem CharacterItem[]
 
   @@map("characters")
 }
@@ -54,7 +54,7 @@ model Item {
   name        String @unique
   description String
 
-  inventoryItem InventoryItem[]
+  characterItem CharacterItem[]
   houseItem     HouseItem[]
 
   @@map("items")
@@ -69,20 +69,11 @@ model Category {
   @@map("categories")
 }
 
-model Inventory {
+
+model CharacterItem {
   id          Int       @id @default(autoincrement())
   characterId Int
-  character   Character @relation(fields: [characterId], references: [id])
-
-  inventoryItem InventoryItem[]
-
-  @@map("inventories")
-}
-
-model InventoryItem {
-  id          Int       @id @default(autoincrement())
-  inventoryId Int
-  inventory   Inventory @relation(fields: [inventoryId], references: [id])
+  character Character[]
   itemId      Int
   item        Item      @relation(fields: [itemId], references: [id])
 
