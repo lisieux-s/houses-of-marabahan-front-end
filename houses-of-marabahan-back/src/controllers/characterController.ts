@@ -27,6 +27,7 @@ export async function setAsActive(req: Request, res: Response) {
   const { characterId } = req.body;
   const houseIdNumber = parseInt(houseId);
   const characterIdNumber = parseInt(characterId)
+  console.log(characterId)
 
   await characterService.setAsActive(houseIdNumber, characterIdNumber)
   res.send(200);

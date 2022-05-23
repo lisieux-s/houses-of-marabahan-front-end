@@ -62,6 +62,12 @@ async function getActiveCharacter(id, token) {
   return await baseAPI.get(`/house/${id}/get/active-character`, token);
 }
 
+async function setActiveCharacter(houseId, characterId, token) {
+  console.log(characterId)
+  getConfig(token);
+  return await baseAPI.put(`/house/${houseId}/set/active-character`, { characterId }, token)
+}
+
 async function findCharactersByHouse(id) {
   return await baseAPI.get(`house/${id}/characters`);
 }
@@ -87,6 +93,7 @@ const api = {
   getItemById,
   createCharacter,
   getActiveCharacter,
+  setActiveCharacter,
   findCharactersByHouse,
   getAllCategories,
   createCategory,

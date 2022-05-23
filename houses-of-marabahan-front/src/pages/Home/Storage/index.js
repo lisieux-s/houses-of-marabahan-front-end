@@ -12,6 +12,7 @@ import { supabase } from '../../../services/supabaseClient';
 export default function Storage() {
   const { houseId } = useHouse();
   const { select } = useInteract();
+  const { enableActions } = useInteract();
 
   const [storageItems, setStorageItems] = useState(null);
   const itemBlobsHashtable = {};
@@ -59,7 +60,11 @@ export default function Storage() {
         {storageItems.length > 0 ? (
           <>
             {storageItems.map((storageItem) => (
-              <Square key={storageItem.id} onClick={() => select(storageItem.item)}>
+              <Square key={storageItem.id} onClick={() => {
+                select(storageItem.item);
+                enableActions('storage')
+
+              }}>
                 <img
                   src={itemBlobs[storageItem.item.name]}
                   alt={storageItem.item.name}
