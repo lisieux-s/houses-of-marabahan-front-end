@@ -18,7 +18,6 @@ export default function RightBar() {
 
   const { activeCharacter } = useCharacter();
   const { storeActiveCharacterData } = useCharacter();
-  console.log(activeCharacter)
 
   const { info } = useInteract();
   const { message } = useInteract();

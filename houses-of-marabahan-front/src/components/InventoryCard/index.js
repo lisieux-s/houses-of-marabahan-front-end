@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { StyledLink } from '../StyledLink/style';
 import { Selection } from '../Selection/style';
@@ -11,18 +11,29 @@ import api from '../../services/api';
 
 export default function InventoryCard() {
   const { activeCharacterName } = useCharacter();
+  //const { activeCharacter } = useCharacter();
+
   const { houseId } = useHouse();
   const [items, setItems] = useState(null);
   const [activeCharacter, setActiveCharacter] = useState(null);
 
-  if (!activeCharacterName) {
+  useEffect(() => {
+    async function getActiveCharacter() {
+      const { data } = await api.getActiveCharacter(houseId);
+      setActiveCharacter(data);
+    }
     getActiveCharacter();
-  }
+  }, []);
 
-  async function getActiveCharacter() {
-    const { data } = await api.getActiveCharacter(houseId);
-    setActiveCharacter(data.name);
-  }
+  useEffect(() => {
+    async function getInventory() {
+      console.log(activeCharacter)
+      // const { data } = await api.getInventory(activeCharacter?.id);
+      // setItems(data);
+    }
+    if(!activeCharacter) return;
+    getInventory();
+  }, [activeCharacter]);
 
   return (
     <Card>
@@ -35,7 +46,7 @@ export default function InventoryCard() {
             </StyledLink>
           </p>
         ) : (
-          'inventory card'
+          'inventory'
         )}
       </Selection>
     </Card>
