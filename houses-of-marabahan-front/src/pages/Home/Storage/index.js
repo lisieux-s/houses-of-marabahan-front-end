@@ -54,16 +54,22 @@ export default function Storage() {
     <>
       <h2>Storage</h2>
       <Selection className='box-shadow'>
-        {storageItems.map((storageItem) => (
-          <Square key={storageItem.id}>
-            {console.log(storageItem.item.name)}
-            <img
-              src={itemBlobs[storageItem.item.name]}
-              alt={storageItem.item.name}
-            />
-            <p>{storageItem.item.name}</p>
-          </Square>
-        ))}
+        {storageItems.length > 0 ? (
+          <>
+            {storageItems.map((storageItem) => (
+              <Square key={storageItem.id}>
+                {console.log(storageItem.item.name)}
+                <img
+                  src={itemBlobs[storageItem.item.name]}
+                  alt={storageItem.item.name}
+                />
+                <p>{storageItem.item.name}</p>
+              </Square>
+            ))}
+          </>
+        ) : (
+          'Your storage is empty.'
+        )}
       </Selection>
     </>
   );

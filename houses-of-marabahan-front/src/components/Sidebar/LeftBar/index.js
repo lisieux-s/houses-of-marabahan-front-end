@@ -2,6 +2,7 @@ import { useLocation } from 'react-router-dom';
 
 import { Sidebar } from '../style';
 import CharacterCard from '../../CharacterCard';
+import InventoryCard from '../../InventoryCard';
 
 import useAuth from '../../../hooks/useAuth';
 
@@ -16,6 +17,7 @@ export default function LeftBar() {
   return (
     <Sidebar left={true}>
       <CharacterCard />
+      <InventoryCard />
     </Sidebar>
   );
 }

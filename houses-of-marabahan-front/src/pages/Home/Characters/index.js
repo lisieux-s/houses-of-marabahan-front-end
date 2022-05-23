@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 
 import { List } from '../../../components/List/style';
+import  { Selection } from '../../../components/Selection/style'
 import { StyledLink } from '../../../components/StyledLink/style';
 import { CharacterPortrait } from '../../../components/CharacterPortrait/style';
 
@@ -66,18 +67,19 @@ export default function Characters() {
         </StyledLink>
       </div>
       {characters ? (
-        <List>
-          {characters.map((character) => (
-            <div key={character.id} className='box-shadow'>
-              <CharacterPortrait image={characterBlobs[character.name]} />
-              <div>
-                <h2>{character.name}</h2>
-                <p>Seeks {character.seeks}</p>
-                <p>Fears {character.fears}</p>
-              </div>
+        characters.length > 0 ? <List>
+        {characters.map((character) => (
+          <div key={character.id} className='box-shadow'>
+            <CharacterPortrait image={characterBlobs[character.name]} />
+            <div>
+              <h2>{character.name}</h2>
+              <p>Seeks {character.seeks}</p>
+              <p>Fears {character.fears}</p>
             </div>
-          ))}
-        </List>
+          </div>
+        ))}
+      </List>
+      : <Selection className='box-shadow'>Your house doesn't have any members.</Selection>
       ) : (
         'Loading characters...'
       )}

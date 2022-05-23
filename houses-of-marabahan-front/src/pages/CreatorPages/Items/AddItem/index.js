@@ -6,6 +6,7 @@ import { Modal } from '../../../../components/Modal/style';
 import { Square } from '../../../../components/Square/style';
 
 import api from '../../../../services/api';
+import { supabase } from '../../../../services/supabaseClient';
 
 export default function AddItem({ modalIsOpen, setModalIsOpen, categories }) {
   const [formData, setFormData] = useState({
@@ -14,7 +15,6 @@ export default function AddItem({ modalIsOpen, setModalIsOpen, categories }) {
     description: '',
     sprite: '',
   });
-
 
   function handleChange({ target }) {
     setFormData({ ...formData, [target.name]: target.value });
@@ -28,11 +28,29 @@ export default function AddItem({ modalIsOpen, setModalIsOpen, categories }) {
         categoryId: formData.categoryId,
         description: formData.description,
       });
-    } catch(error) {
-      alert('Please try again in a moment')
+      if (formData.sprite) {
+        await uploadImage();
+      }
+    } catch (error) {
+      alert('Please try again in a moment');
       console.log(error);
     }
   }
+
+  async function uploadImage({ target }) {
+    try {
+      const file = target.files[0];
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${formData.name}.${fileExt}`;
+      const filePath = formData.name;
+
+      let { error: uploadError } = await supabase.storage.from('/public/marabahani/')
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   if (!categories) return '';
   return (
     <Modal isOpen={modalIsOpen}>

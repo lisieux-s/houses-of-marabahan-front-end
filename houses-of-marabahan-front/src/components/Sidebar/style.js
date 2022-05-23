@@ -8,6 +8,7 @@ export const Sidebar = styled.div`
   width: 25vw;
   height: 100%;
   padding: 8px;
+  gap: 8px;
 
   position: fixed;
   left: ${props => props.left? '0' : 'auto'};

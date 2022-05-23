@@ -58,6 +58,7 @@ export async function addToStorage(itemId: number, houseId: number) {
     },
   });
 }
+
 export async function moveToStorage() {}
 export async function addToInventory() {}
 export async function moveToInventory() {}

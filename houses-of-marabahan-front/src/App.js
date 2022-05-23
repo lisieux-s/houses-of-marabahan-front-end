@@ -16,7 +16,6 @@ import RightBar from './components/Sidebar/RightBar';
 import { AuthProvider } from './contexts/AuthContext';
 import { HouseProvider } from './contexts/HouseContext';
 import { CharacterProvider } from './contexts/CharacterContext';
-//import Footer from './components/Footer';
 
 export default function App() {
   return (
@@ -36,7 +35,6 @@ export default function App() {
             <Route path='/kinds' element={<Kinds />} />
           </Routes>
           <RightBar />
-          {/* <Footer /> */}
         </BrowserRouter>
         </CharacterProvider>
       </HouseProvider>

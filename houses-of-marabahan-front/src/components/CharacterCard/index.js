@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-
+import { StyledLink } from '../StyledLink/style'
 import { Card } from './style';
 import { CharacterPortrait } from '../CharacterPortrait/style';
 
@@ -76,9 +76,8 @@ export default function CharacterCard() {
 
   return (
     <Card>
-      <CharacterPortrait image={characterImage}></CharacterPortrait>
-      <h4>{character?.name}</h4>
-      <p>active character</p>
+      {character? <><CharacterPortrait image={characterImage}></CharacterPortrait>
+      <h4>{character?.name}</h4></> : <>Your house doesn't have any characters yet. <StyledLink to={'/create/character'}><h4>Create your first!</h4></StyledLink></>}
     </Card>
   );
 }
