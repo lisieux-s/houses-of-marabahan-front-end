@@ -1,16 +1,24 @@
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import { Sidebar } from '../style';
 import InformationBox from '../../InformationBox';
 
 import useInteract from '../../../hooks/useInteract';
-import { useEffect, useState } from 'react';
+
 
 export default function RightBar() {
   const { info } = useInteract();
   const [displayInfo, setDisplayInfo] = useState('');
+  const path = useLocation().pathname
 
   useEffect(() => {
     setDisplayInfo(info);
   }, [info]);
+
+  useEffect(() => {
+    setDisplayInfo('')
+  }, [path])
 
   if(!displayInfo) return ''
   return (
