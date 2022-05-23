@@ -4,20 +4,31 @@ import { useNavigate } from 'react-router-dom';
 import { Square } from '../../components/Square/style';
 import { Selection } from '../../components/Selection/style';
 
-import useAuth from '../../hooks/useAuth'
-import useHouse from '../../hooks/useHouse'
+import useAuth from '../../hooks/useAuth';
+import useHouse from '../../hooks/useHouse';
+import useInteract from '../../hooks/useInteract'
 
 import api from '../../services/api';
+import { supabase } from '../../services/supabaseClient';
 
 export default function CreateHouse() {
   const navigate = useNavigate();
 
   const { signIn } = useAuth();
   const { storeHouseData } = useHouse();
+  const { select } = useInteract();
+  const { alert } = useInteract();
+
+  const [items, setItems] = useState([]);
+
+  const [shovel, setShovel] = useState(null);
+  const [sword, setSword] = useState(null);
+  const [knittingKit, setKnittingKit] = useState(null);
 
   const [shovelImageUrl, setShovelImageUrl] = useState('');
   const [swordImageUrl, setSwordImageUrl] = useState('');
   const [knittingKitImageUrl, setKnittingKitImageUrl] = useState('');
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -28,44 +39,55 @@ export default function CreateHouse() {
   const [inputWidth, setInputWidth] = useState('500px');
 
   //add function for filtering names (length, allowed characters...)
-  //add context for leftbar for cases when name is unavailable
 
   useEffect(() => {
-    async function getStarterItem(id) {
-      const { data } = await api.getItemById(id);
-      switch (id) {
-        case 1:
-          setShovelImageUrl(data.spriteUrl);
-          break;
-        case 2:
-          setSwordImageUrl(data.spriteUrl);
-          break;
-        case 3:
-          setKnittingKitImageUrl(data.spriteUrl);
-          break;
-        default:
-          break;
-      }
+    async function getStarterItems() {
+      setShovel((await api.getItemByName('starter shovel')).data);
+      setSword((await api.getItemByName('starter sword')).data);
+      setKnittingKit((await api.getItemByName('starter knitting kit')).data);
     }
-    for (let i = 1; i <= 3; i++) {
-      getStarterItem(i);
-    }
+    getStarterItems();
   }, []);
 
   useEffect(() => {
-    const delay = setTimeout(async () => {
-      if (formData.name.length >= 3) {
-        const result = await api.findHouseByName(formData.name);
-        if (result.data) console.log('Sorry, this name is unavailable.');
-      }
-    }, 1000);
-
-    return () => clearTimeout(delay);
-  }, [formData.name]);
+    async function downloadImage(category, name) {
+      const { data } = await supabase.storage
+        .from(`public/marabahani/items/${category}`)
+        .download(`${name}.png`);
+      const url = URL.createObjectURL(data);
+      return url;
+    }
+    async function getShovelImage() {
+      setShovelImageUrl(await downloadImage('gardening', 'starter shovel'));
+    }
+    async function getSwordImage() {
+      setSwordImageUrl(await downloadImage('weapons', 'starter sword'));
+    }
+    async function getKnittingKitImage() {
+      setKnittingKitImageUrl(
+        await downloadImage('crafts', 'starter knitting kit')
+      );
+    }
+    getShovelImage();
+    getSwordImage();
+    getKnittingKitImage();
+  }, [items]);
 
   useEffect(() => {
     const width = 128 + formData.name.length * 16;
     setInputWidth(`${width}px`);
+
+    const delay = setTimeout(async () => {
+      alert('')
+      if (formData.name.length >= 3) {
+        const result = await api.findHouseByName(formData.name);
+        if (result.data) {
+          alert('Sorry, this name is unavailable.')
+        };
+      }
+    }, 1000);
+
+    return () => clearTimeout(delay);
   }, [formData.name]);
 
   function handleChange({ target }) {
@@ -83,16 +105,17 @@ export default function CreateHouse() {
     };
     const starterItem = formData.starterItem;
     try {
-
       await api.signUp({
         houseData,
         starterItem,
       });
       const { data } = await api.findHouseByName(houseData.name);
-      const token = await api.signIn({ name: houseData.name, password: houseData.password });
+      const token = await api.signIn({
+        name: houseData.name,
+        password: houseData.password,
+      });
       signIn(token);
-      console.log(data)
-      storeHouseData(data)
+      storeHouseData(data);
 
       navigate('/create/character');
     } catch (error) {}
@@ -139,7 +162,7 @@ export default function CreateHouse() {
         />
         <h3>Choose a starter item</h3>
         <Selection>
-          <Square htmlFor='shovel' selected={formData.starterItem === 'shovel'}>
+          <Square htmlFor='shovel' selected={formData.starterItem === 'shovel'} onClick={() => select(shovel)}>
             <img src={shovelImageUrl} alt='shovel' />
             <p>shovel</p>
           </Square>
@@ -150,7 +173,7 @@ export default function CreateHouse() {
             value='shovel'
             onChange={(e) => handleChange(e)}
           />
-          <Square htmlFor='sword' selected={formData.starterItem === 'sword'}>
+          <Square htmlFor='sword' selected={formData.starterItem === 'sword'} onClick={() => select(sword)}>
             <img src={swordImageUrl} alt='sword' />
             <p>sword</p>
           </Square>
@@ -164,6 +187,7 @@ export default function CreateHouse() {
           <Square
             htmlFor='knitting-kit'
             selected={formData.starterItem === 'knitting kit'}
+            onClick={() => select(knittingKit)}
           >
             <img src={knittingKitImageUrl} alt='knitting kit' />
             <p>knitting kit</p>

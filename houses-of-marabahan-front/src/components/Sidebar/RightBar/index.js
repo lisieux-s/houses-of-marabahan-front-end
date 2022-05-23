@@ -6,27 +6,37 @@ import InformationBox from '../../InformationBox';
 
 import useInteract from '../../../hooks/useInteract';
 
-
 export default function RightBar() {
   const { info } = useInteract();
+  const { message } = useInteract();
   const [displayInfo, setDisplayInfo] = useState('');
-  const path = useLocation().pathname
+  const path = useLocation().pathname;
 
   useEffect(() => {
     setDisplayInfo(info);
   }, [info]);
 
   useEffect(() => {
-    setDisplayInfo('')
-  }, [path])
+    setDisplayInfo('');
+  }, [path]);
 
-  if(!displayInfo) return ''
   return (
     <Sidebar right={true}>
-      <InformationBox>
-        <h2>{displayInfo.name}</h2>
-        <p>{displayInfo.description}</p>
-      </InformationBox>
+      {info ? (
+        <InformationBox>
+          <h2>{displayInfo.name}</h2>
+          <p>{displayInfo.description}</p>
+        </InformationBox>
+      ) : (
+        ''
+      )}
+      {message ? (
+        <InformationBox type='alert'>
+          <p className='alert'>{message}</p>
+        </InformationBox>
+      ) : (
+        ''
+      )}
     </Sidebar>
   );
 }

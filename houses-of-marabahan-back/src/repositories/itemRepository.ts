@@ -47,6 +47,9 @@ export async function findByName(name: string) {
 export async function findById(id: number) {
   return await prisma.item.findUnique({
     where: { id },
+    include: { category: {
+      select: { name: true }
+    } }
   });
 }
 

@@ -4,12 +4,14 @@ import { Selection } from '../../../components/Selection/style';
 import { Square } from '../../../components/Square/style';
 
 import useHouse from '../../../hooks/useHouse';
+import useInteract from '../../../hooks/useInteract'
 
 import api from '../../../services/api';
 import { supabase } from '../../../services/supabaseClient';
 
 export default function Storage() {
   const { houseId } = useHouse();
+  const { select } = useInteract();
 
   const [storageItems, setStorageItems] = useState(null);
   const itemBlobsHashtable = {};
@@ -57,8 +59,7 @@ export default function Storage() {
         {storageItems.length > 0 ? (
           <>
             {storageItems.map((storageItem) => (
-              <Square key={storageItem.id}>
-                {console.log(storageItem.item.name)}
+              <Square key={storageItem.id} onClick={() => select(storageItem.item)}>
                 <img
                   src={itemBlobs[storageItem.item.name]}
                   alt={storageItem.item.name}

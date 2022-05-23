@@ -1,8 +1,8 @@
 import { StyledDiv } from "./style";
 
-export default function InformationBox({ children }) {
+export default function InformationBox({ children , type}) {
     return(
-        <StyledDiv>
+        <StyledDiv type={type}>
             <div>
                 {children}
             </div>
