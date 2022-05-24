@@ -20,7 +20,7 @@ services:
     volumes:
       - .:/usr/src
       - /usr/src/node_modules
-    entrypoint: dockerize -wait tcp://database:5432 -timeout 20s docker-entrypoint.sh
+    # entrypoint: dockerize -wait tcp://database:5432 -timeout 20s docker-entrypoint.sh
     command: "npm run dev"
     depends_on:
       - database
