@@ -8,7 +8,7 @@ services:
     env_file:
       - .env
     volumes:
-      - volume_banco:/var/lib/postgresql/data
+      - volume_database:/var/lib/postgresql/data
 
   app_node:
     build: .
@@ -23,7 +23,7 @@ services:
     entrypoint: dockerize -wait tcp://banco:5432 -timeout 20s docker-entrypoint.sh
     command: "npm run dev"
     depends_on:
-      - banco
+      - database
 
 volumes:
-  volume_banco:
+  volume_database:
