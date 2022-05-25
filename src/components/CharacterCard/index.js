@@ -18,19 +18,28 @@ export default function CharacterCard() {
   const [character, setCharacter] = useState(null);
   const [characterImage, setCharacterImage] = useState(null);
 
-  useEffect(() => {
+  if(!activeCharacter) {
     getCharacterData();
-  }, [houseId, token]);
+  }
+
+  useEffect(() => {
+    if(activeCharacter !== character) {
+      getCharacterData();
+    }
+  }, [activeCharacter]);
 
   useEffect(() => {
     downloadImage(character?.kind?.name);
   }, [character]);
 
   async function getCharacterData() {
-    const { data } = await api.getActiveCharacter(houseId, token);
-    console.log(data)
-    setCharacter(data);
-    storeActiveCharacterData(data)
+    try {
+      const { data } = await api.getActiveCharacter(houseId, token); //maybe change ir and search character by name and house using the character context thingy
+      setCharacter(data);
+      storeActiveCharacterData(data)
+    } catch(error) {
+      console.log(error)
+    }
   }
 
   async function downloadImage(path) {

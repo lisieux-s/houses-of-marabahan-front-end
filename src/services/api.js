@@ -79,6 +79,10 @@ async function setActiveCharacter(houseId, characterId, token) {
   );
 }
 
+async function findCharacterByNameAndHouse() {
+  
+}
+
 async function findCharactersByHouse(id) {
   return await baseAPI.get(`house/${id}/characters`);
 }
