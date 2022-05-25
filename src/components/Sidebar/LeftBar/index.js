@@ -11,7 +11,7 @@ export default function LeftBar() {
 
   const { token } = useAuth();
 
-  if (path === '/items' || path === '/kinds' || path === '/create/character')
+  if (path === '/items' || path === '/kinds' || path === '/create/house' || path === '/create/character')
     return '';
   if (!token) return '';
   return (

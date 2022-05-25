@@ -5,6 +5,7 @@ import { Modal } from '../Modal/style';
 
 import useAuth from '../../hooks/useAuth';
 import useHouse from '../../hooks/useHouse'
+import useInteract from '../../hooks/useInteract';
 
 import api from '../../services/api';
 
@@ -12,6 +13,7 @@ export default function SignIn({ message, modalIsOpen, setModalIsOpen }) {
   const navigate = useNavigate();
   const { signIn } = useAuth();
   const { storeHouseData } = useHouse();
+  const { alert } = useInteract();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -35,11 +37,14 @@ export default function SignIn({ message, modalIsOpen, setModalIsOpen }) {
       signIn(data.token);
       storeHouseData(houseData)
 
-
       setModalIsOpen(false);
-      if(!message) navigate('/home');
+      navigate('/home');
     } catch (error) {
-      console.log(error);
+      if(error.response) {
+        alert(error.response.data)
+        return;
+      }
+      alert('Please try again in a moment.')
     }
   }
 
@@ -50,7 +55,6 @@ export default function SignIn({ message, modalIsOpen, setModalIsOpen }) {
 
   return (
     <Modal isOpen={modalIsOpen}>
-      <p className='alert'>{message}</p>
       <form onSubmit={(e) => handleModalSubmit(e)}>
         <input
           placeholder='name of your house'

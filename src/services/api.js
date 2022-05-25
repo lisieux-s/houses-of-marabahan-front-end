@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const baseAPI = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: 'https://houses-of-marabahan-back.herokuapp.com',
 });
 
 function getConfig(token) {
@@ -53,11 +53,11 @@ async function getItemById(id) {
 }
 
 async function moveToInventory(body) {
-  console.log(body)
+  console.log(body);
   await baseAPI.post('/move-to-inventory', body);
 }
 async function getInventory(characterId) {
-  await baseAPI.get(`/character/${characterId}/get/inventory`)
+  await baseAPI.get(`/character/${characterId}/get/inventory`);
 }
 
 async function createCharacter(data, id, token) {
@@ -72,7 +72,11 @@ async function getActiveCharacter(id, token) {
 
 async function setActiveCharacter(houseId, characterId, token) {
   getConfig(token);
-  return await baseAPI.put(`/house/${houseId}/set/active-character`, { characterId }, token)
+  return await baseAPI.put(
+    `/house/${houseId}/set/active-character`,
+    { characterId },
+    token
+  );
 }
 
 async function findCharactersByHouse(id) {

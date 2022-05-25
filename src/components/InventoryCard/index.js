@@ -27,7 +27,6 @@ export default function InventoryCard() {
 
   useEffect(() => {
     async function getInventory() {
-      console.log(activeCharacter)
       // const { data } = await api.getInventory(activeCharacter?.id);
       // setItems(data);
     }

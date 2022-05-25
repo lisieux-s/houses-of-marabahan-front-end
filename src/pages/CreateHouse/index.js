@@ -96,7 +96,7 @@ export default function CreateHouse() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    checkPasswordConfirmation();
+    if(!arePasswordsEqual()) return;
 
     const houseData = {
       name: formData.name,
@@ -118,12 +118,17 @@ export default function CreateHouse() {
       storeHouseData(data);
 
       navigate('/create/character');
-    } catch (error) {}
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  function checkPasswordConfirmation() {
-    if (formData.password !== formData.passwordConfirm)
+  function arePasswordsEqual() {
+    if (formData.password !== formData.passwordConfirm) {
       alert('Passwords must be the same!');
+      return(false);
+    }
+    return true
   }
 
   return (

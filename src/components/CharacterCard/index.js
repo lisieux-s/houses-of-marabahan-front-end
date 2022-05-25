@@ -23,17 +23,19 @@ export default function CharacterCard() {
   }, [houseId, token]);
 
   useEffect(() => {
-    downloadImage(kindIdToKindName(character?.kindId));
+    downloadImage(character?.kind?.name);
   }, [character]);
 
   async function getCharacterData() {
     const { data } = await api.getActiveCharacter(houseId, token);
+    console.log(data)
     setCharacter(data);
     storeActiveCharacterData(data)
   }
 
   async function downloadImage(path) {
     //for now, character image is just the kind sprite
+    if(!path) return;
     try {
       if (character) {
         const { data, error } = await supabase.storage
@@ -45,33 +47,6 @@ export default function CharacterCard() {
       }
     } catch (error) {
       console.log(`Couldn't load image: ${error.message}`);
-    }
-  }
-
-  function kindIdToKindName(id) {
-    switch (id) {
-      case 1:
-        return 'clayfeet';
-      case 2:
-        return 'paladi';
-      case 3:
-        return 'flowerbud';
-      case 4:
-        return 'merperson';
-      case 5:
-        return 'mogami';
-      case 6:
-        return 'moonlit';
-      case 7:
-        return 'blue folk';
-      case 8:
-        return 'blaoru';
-      case 9:
-        return 'baego';
-      case 10:
-        return 'revenant';
-      default:
-        return 'ZERO';
     }
   }
 
