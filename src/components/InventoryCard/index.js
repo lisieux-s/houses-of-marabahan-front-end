@@ -18,12 +18,13 @@ export default function InventoryCard() {
   const [activeCharacter, setActiveCharacter] = useState(null);
 
   useEffect(() => {
+    if(!houseId) return;
     async function getActiveCharacter() {
       const { data } = await api.getActiveCharacter(houseId);
       setActiveCharacter(data);
     }
     getActiveCharacter();
-  }, []);
+  }, [houseId]);
 
   useEffect(() => {
     async function getInventory() {

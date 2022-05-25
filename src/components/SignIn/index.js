@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import CloseIcon from '@mui/icons-material/Close';
+
 import { Modal } from '../Modal/style';
 
 import useAuth from '../../hooks/useAuth';
-import useHouse from '../../hooks/useHouse'
+import useHouse from '../../hooks/useHouse';
 import useInteract from '../../hooks/useInteract';
 
 import api from '../../services/api';
@@ -35,26 +37,34 @@ export default function SignIn({ message, modalIsOpen, setModalIsOpen }) {
       const { data } = await api.signIn(formData);
       const houseData = await getHouse();
       signIn(data.token);
-      storeHouseData(houseData)
+      storeHouseData(houseData);
 
       setModalIsOpen(false);
       navigate('/home');
     } catch (error) {
-      if(error.response) {
-        alert(error.response.data)
+      if (error.response) {
+        alert(error.response.data);
         return;
       }
-      alert('Please try again in a moment.')
+      alert('Please try again in a moment.');
     }
   }
 
   async function getHouse() {
     const { data } = await api.findHouseByName(formData.name);
-    return(data);
+    return data;
   }
 
   return (
     <Modal isOpen={modalIsOpen}>
+      <p className='alert'>{message}</p>
+      {setModalIsOpen ? (
+        <div className='x' onClick={() => setModalIsOpen(false)}>
+          <CloseIcon />
+        </div>
+      ) : (
+        ''
+      )}
       <form onSubmit={(e) => handleModalSubmit(e)}>
         <input
           placeholder='name of your house'

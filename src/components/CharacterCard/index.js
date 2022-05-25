@@ -23,10 +23,11 @@ export default function CharacterCard() {
   }
 
   useEffect(() => {
+    if(!houseId) return ''
     if(activeCharacter !== character) {
       getCharacterData();
     }
-  }, [activeCharacter]);
+  }, [activeCharacter, houseId]);
 
   useEffect(() => {
     downloadImage(character?.kind?.name);

@@ -24,12 +24,13 @@ export default function Characters() {
   const [characterBlobs, setCharacterBlobs] = useState({});
 
   useEffect(() => {
+    if(!houseId) return;
     async function getCharacters() {
       const { data } = await api.findCharactersByHouse(houseId);
       setCharacters(data);
     }
     getCharacters();
-  }, []);
+  }, [houseId]);
 
   useEffect(() => {
     async function downloadImage(character) {
@@ -56,7 +57,7 @@ export default function Characters() {
     populateCharacterBlobs();
   }, [characters]);
 
-  if (!characters) return '';
+  if (!characters) return 'Loading members...';
   return (
     <>
       <div className='justify-content-space-between'>

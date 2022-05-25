@@ -19,12 +19,13 @@ export default function Storage() {
   const [itemBlobs, setItemBlobs] = useState({});
 
   useEffect(() => {
+    if(!houseId) return;
     async function getStorage(id) {
       const { data } = await api.getStorage(id);
       setStorageItems(data);
     }
     getStorage(houseId);
-  }, []);
+  }, [houseId]);
 
   useEffect(() => {
     async function downloadImage(name, category) {

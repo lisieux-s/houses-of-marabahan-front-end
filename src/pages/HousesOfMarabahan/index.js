@@ -8,7 +8,6 @@ export default function HousesOfMarabahan() {
     const navigate = useNavigate();
     const { token } = useAuth();
 
-    if(token) navigate('/home')
     return(
         <main>
             Welcome to Marabahan!
