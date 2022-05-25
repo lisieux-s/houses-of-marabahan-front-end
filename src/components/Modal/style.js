@@ -9,7 +9,7 @@ export const Modal = styled.div`
 
   position: fixed;
   top: 102px;
-  z-index: 300;
+  z-index: 1000;
   width: 45vw;
 
   margin: 16px;

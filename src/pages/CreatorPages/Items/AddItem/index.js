@@ -11,11 +11,14 @@ import { supabase } from '../../../../services/supabaseClient';
 export default function AddItem({ modalIsOpen, setModalIsOpen, categories }) {
   const [formData, setFormData] = useState({
     name: '',
-    categoryId: '',
+    category: {},
     description: '',
     sprite: '',
   });
 
+  useEffect(() => {
+    console.log(formData.category);
+  }, [formData]);
 
   function handleChange({ target }) {
     setFormData({ ...formData, [target.name]: target.value });
@@ -23,10 +26,11 @@ export default function AddItem({ modalIsOpen, setModalIsOpen, categories }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    console.log(formData);
     try {
       await api.createItem({
         name: formData.name,
-        categoryId: formData.categoryId,
+        categoryId: formData.category.id,
         description: formData.description,
       });
       if (formData.sprite) {
@@ -34,11 +38,11 @@ export default function AddItem({ modalIsOpen, setModalIsOpen, categories }) {
       }
       setFormData({
         name: '',
-        categoryId: '',
+        category: '',
         description: '',
         sprite: '',
       });
-      setModalIsOpen(false)
+      setModalIsOpen(false);
     } catch (error) {
       alert('Please try again in a moment');
       console.log(error);
@@ -47,13 +51,15 @@ export default function AddItem({ modalIsOpen, setModalIsOpen, categories }) {
 
   async function uploadImage({ target }) {
     try {
-      const file = target.files[0];
+      const file = formData.sprite;
       const fileExt = file.name.split('.').pop();
       const fileName = `${formData.name}.${fileExt}`;
       const filePath = formData.name;
 
-      let { error: uploadError } = await supabase.storage.from('/public/marabahani/')
-
+      let { error: uploadError } = await supabase.storage
+        .from(`public/marabahani/${formData.category.name}`)
+        .upload(formData.name, formData.sprite);
+      if (uploadError) throw uploadError;
     } catch (error) {
       console.log(error);
     }
@@ -71,9 +77,16 @@ export default function AddItem({ modalIsOpen, setModalIsOpen, categories }) {
           <div className='outline text-align-center'>
             <p>Sprite</p>
             <Square htmlFor='input-sprite'>
-              <p>Upload image</p>
+              {formData.sprite ? formData.sprite : <p>Upload image</p>}
             </Square>
-            <input id='input-sprite' type='file' accept='.png' />
+            <input
+              id='input-sprite'
+              type='file'
+              name='sprite'
+              value={formData.sprite}
+              accept='.png'
+              onChange={(e) => handleChange(e)}
+            />
           </div>
 
           <div className='outline'>
@@ -85,10 +98,16 @@ export default function AddItem({ modalIsOpen, setModalIsOpen, categories }) {
               onChange={(e) => handleChange(e)}
             />
             <p>Category</p>
-            <select type='' name='categoryId' onChange={(e) => handleChange(e)}>
+            <select type='' name='category'>
               <option value={0}>None</option>
               {categories.map((category) => (
-                <option key={category.id} value={category.id}>
+                <option
+                  key={category.id}
+                  value={category}
+                  onClick={() => {
+                    setFormData({ ...formData, category });
+                  }}
+                >
                   {category.name}
                 </option>
               ))}
