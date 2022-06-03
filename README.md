@@ -1,5 +1,6 @@
 # About Houses of Marabahan
 A modern take on 2000s browser-based virtual worlds.
+This is a front-end application for <a href='https://github.com/lisieux-s/houses-of-marabahan-back-end'>Houses of Marabahan's back-end application</a>
 
 ## Features
 - Found your house and create multiple characters 
