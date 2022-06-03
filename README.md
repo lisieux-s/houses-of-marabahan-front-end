@@ -3,6 +3,7 @@ A modern take on 2000s browser-based virtual worlds.
 
 ## Features
 - Found your house and create multiple characters 
+- Creator's area for item creation and edition
 
 ## Features in development
 
