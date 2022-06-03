@@ -1,7 +1,11 @@
 import axios from 'axios';
 
+// const baseAPI = axios.create({
+//   baseURL: 'https://houses-of-marabahan-back.herokuapp.com',
+// });
+
 const baseAPI = axios.create({
-  baseURL: 'https://houses-of-marabahan-back.herokuapp.com',
+  baseURL: 'http://localhost:5000',
 });
 
 function getConfig(token) {
@@ -24,8 +28,9 @@ async function findHouseByName(name) {
   return await baseAPI.get(`/house/${name}`);
 }
 
-async function getStorage(id) {
-  return await baseAPI.get(`/house/${id}/storage`);
+async function getStorage(id, token) {
+  const config = getConfig(token);
+  return await baseAPI.get(`/house/${id}/storage`, config);
 }
 
 async function getKinds() {
@@ -52,35 +57,31 @@ async function getItemById(id) {
   return await baseAPI.get(`/item/${id}`);
 }
 
-async function moveToInventory(body) {
-  console.log(body);
-  await baseAPI.post('/move-to-inventory', body);
+async function moveToInventory(body, token) {
+  const config = getConfig(token);
+  await baseAPI.post('/move-to-inventory', body, config);
 }
 async function getInventory(characterId) {
   await baseAPI.get(`/character/${characterId}/get/inventory`);
 }
 
 async function createCharacter(data, id, token) {
-  getConfig(token);
-  await baseAPI.post(`/house/${id}/create/character`, data, token);
+  const config = getConfig(token);
+  await baseAPI.post(`/house/${id}/create/character`, data, config);
 }
 
 async function getActiveCharacter(id, token) {
-  getConfig(token);
-  return await baseAPI.get(`/house/${id}/get/active-character`, token);
+  const config = getConfig(token);
+  return await baseAPI.get(`/house/${id}/get/active-character`, config);
 }
 
 async function setActiveCharacter(houseId, characterId, token) {
-  getConfig(token);
+  const config = getConfig(token);
   return await baseAPI.put(
     `/house/${houseId}/set/active-character`,
     { characterId },
-    token
+    config
   );
-}
-
-async function findCharacterByNameAndHouse() {
-  
 }
 
 async function findCharactersByHouse(id) {

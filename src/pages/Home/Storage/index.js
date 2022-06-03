@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Selection } from '../../../components/Selection/style';
 import { Square } from '../../../components/Square/style';
 
+import useAuth from '../../../hooks/useAuth';
 import useHouse from '../../../hooks/useHouse';
 import useInteract from '../../../hooks/useInteract'
 
@@ -10,6 +11,7 @@ import api from '../../../services/api';
 import { supabase } from '../../../services/supabaseClient';
 
 export default function Storage() {
+  const { token } = useAuth();
   const { houseId } = useHouse();
   const { select } = useInteract();
   const { enableActions } = useInteract();
@@ -21,7 +23,7 @@ export default function Storage() {
   useEffect(() => {
     if(!houseId) return;
     async function getStorage(id) {
-      const { data } = await api.getStorage(id);
+      const { data } = await api.getStorage(id, token);
       setStorageItems(data);
     }
     getStorage(houseId);
