@@ -4,10 +4,10 @@ This is a front-end application for <a href='https://github.com/lisieux-s/houses
 
 ## Features
 - Found your house and create multiple characters 
+- Look into the details of kinds and items
 - Creator's area for item creation and edition
 
 ## Features in development
-
 - Send messages and gifts to your friends
 - Trade with other players
 - Spend your hard-earned money on a meal at Mikaila's (and listen to her advice, free of charge)
