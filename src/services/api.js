@@ -5,8 +5,12 @@ import axios from 'axios';
 // });
 
 const baseAPI = axios.create({
-  baseURL: 'http://localhost:5000',
-});
+    baseURL: 'https://houses-of-marabahan-back-end.onrender.com/'
+})
+
+// const baseAPI = axios.create({
+//   baseURL: 'http://localhost:5000',
+// });
 
 function getConfig(token) {
   return {
