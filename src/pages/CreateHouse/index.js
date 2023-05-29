@@ -133,6 +133,7 @@ export default function CreateHouse() {
 
   return (
     <main>
+
       <form onSubmit={(e) => handleSubmit(e)}>
         <h3>Create an account</h3>
         <input
@@ -220,6 +221,7 @@ export default function CreateHouse() {
         />
         <button>Send</button>
       </form>
+
     </main>
   );
 }
