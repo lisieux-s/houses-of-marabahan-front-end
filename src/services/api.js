@@ -1,9 +1,5 @@
 import axios from 'axios';
 
-// const baseAPI = axios.create({
-//   baseURL: 'https://houses-of-marabahan-back.herokuapp.com',
-// });
-
 const baseAPI = axios.create({
     baseURL: 'https://houses-of-marabahan-back-end.onrender.com/'
 })
